@@ -1,6 +1,10 @@
 # Prerequisites
 *.d
 
+# User
+**/SourceCodeForStudents_7.0/*
+**/Testing/*
+
 # Compiled Object files
 *.slo
 *.lo
