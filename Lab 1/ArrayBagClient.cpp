@@ -33,7 +33,10 @@ int main()
 
 		switch (input) {
 			case '1': {
+				// Assign displayBag to the bag vector
 				auto displayBag = bag.toVector();
+
+				// Display Bag Contents
 				for (int i{0}; i < displayBag.size(); i++) {
 					std::cout << displayBag[i] << std::endl;
 				}
@@ -43,6 +46,7 @@ int main()
 				// Add Value to Bag
 				std::string newItem;
 
+				// Do while newItem is not an integer
 				do {
 					std::cout << "Enter an Integer: ";
 					std::cin >> newItem;
@@ -59,11 +63,33 @@ int main()
 				break;
 			}
 			case '3': {
-				// Remove Value from bag
+				// Remove an item from the bag
+				std::string removedItem;
+
+				// Do while removedItem is not "EXIT"
+				do {
+					std::cout << "Type EXIT to return to the main menu" << std::endl;
+					std::cout << "Enter and Integer to remove: ";
+					std::cin >> removedItem;
+
+					// If is not an integer, display error
+					if (!isInt(removedItem)) {
+						std::cout << "Error - new item must be an integer..." << std::endl;
+					}
+					// Else if removedItem is not in bag, display error
+					else if (!bag.contains(stoi(removedItem))) {
+						std::cout << "This integer is not in the bag..." << std::endl;
+					}
+					// else, no errors, remove the item from the bag
+					else {
+						bag.remove(stoi(removedItem));
+					}
+				} while(removedItem != "EXIT");
 				break;
 			}
 			case '4': {
-				// Sort Bag
+				// Call bubbleSort()
+				bag.bubbleSort();
 				break;
 			}
 			case '5': {
@@ -93,8 +119,10 @@ int main()
 
 bool isInt(const std::string& str) {
 
+	// return true if string is not empty
+	// 
 	return !str.empty() &&
-        std::find_if(str.begin(), str.end(), // find_if 
+        std::find_if(str.begin(), str.end(),
             [](unsigned char c) { return !std::isdigit(c); }) == str.end();
 }
 
