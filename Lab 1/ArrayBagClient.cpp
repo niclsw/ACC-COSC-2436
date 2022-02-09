@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <algorithm>
 #include "ArrayBag.h"
 
@@ -27,7 +28,8 @@ int main()
 		std::cout << "(6) Recursive Search" << std::endl;
 		std::cout << "(0) End Program" << std::endl;
 		std::cout << "Enter Option: ";
-		std::cin >> input;
+		scanf("%c", &input); //
+		fflush(stdin); // flush output buffer stream
 
 		switch (input) {
 			case '1': {
@@ -59,8 +61,10 @@ int main()
 						// If item is already in bag display error message
 						else if (bag.contains(stoi(newItem)))
 							std::cout << "Error - this item is already in the bag..." << std::endl;
+						else if (!bag.add(stoi(newItem)))
+							std::cout << "Error - the bag is full..." << std::endl;
 
-					} while (!isInt(newItem) && bag.contains(stoi(newItem)));
+					} while (!isInt(newItem) && bag.contains(stoi(newItem)) && !bag.add(stoi(newItem)));
 				}
 				
 				// Add new item to bag using inline if-else
@@ -83,17 +87,17 @@ int main()
 					std::cout << "Enter and Integer to remove: ";
 					std::cin >> removedItem;
 
-					// If is not an integer, display error
-					if (!isInt(removedItem)) {
-						std::cout << "Error - new item must be an integer..." << std::endl;
-					}
-					// Else if removedItem is not in bag, display error
-					else if (!bag.contains(stoi(removedItem))) {
+					// removedItem is not in bag, display error
+					if (!bag.contains(stoi(removedItem))) {
 						std::cout << "This integer is not in the bag..." << std::endl;
 					}
 					// else, no errors, remove the item from the bag
 					else if (!(removedItem == "EXIT") || !(removedItem == "exit")) {
 						bag.remove(stoi(removedItem));
+					}
+					// (!isInt(removedItem))
+					else {
+						std::cout << "Error - new item must be an integer..." << std::endl;
 					}
 				} while(!(removedItem == "EXIT") || !(removedItem == "exit"));
 
@@ -143,7 +147,7 @@ int main()
 bool isInt(const std::string& str) {
 
 	// return true if string is not empty
-	//  return true if string contains a char equal to a digit 0-9
+	//  return true if string contains only char(s) equal to a digit 0-9
 	// 	 uses Lamba functions to check each char for digits. 
 	//    Instant false if char is not digit
 	return !str.empty() &&

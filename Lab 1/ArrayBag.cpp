@@ -8,10 +8,9 @@ template<class ItemType>
 void ArrayBag<ItemType>::bubbleSort()
 {
    for (int i{0}; i < itemCount - 1; i++) {
-      for (int j{0}; j < itemCount - i - 1; j++) {
-         if(items[j] > items[j+1]) {
-            std::swap(items[j], items[j+1]);
-         }
+      for (int x{0}; j < itemCount - i - 1; x++) {
+         if(items[x] > items[x+1]) 
+            std::swap(items[x], items[x+1]); //swap items[a] with items [a+1]
       }
    }
 }  // end isEmpty
