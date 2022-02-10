@@ -114,7 +114,6 @@ int main()
 				isSorted = true;
 
 				std::cout << "The bag has been sorted...";
-
 				// break from case and endl to create some space
 				std::cout << std::endl;
 				break;
@@ -124,7 +123,26 @@ int main()
 				break;
 			}
 			case '6': {
-				// Recursive Search
+				std::string searchItemStr;
+
+				do {
+					std::cout << "Enter an integer to search for: ";
+					scanf("%s", &searchItemStr);
+					fflush(stdin);
+
+					if (isInt(searchItemStr)) {
+						if (bag.binarySearchRecursive(stoi(searchItemStr), 0, bag.getCurrentSize(), (bag.getCurrentSize() / 2))) {
+							std::cout << "Success! We found " << searchItemStr << " in the bag." << std::endl;
+						}
+						else {
+							std::cout << "We could not find " << searchItemStr << " in the bag." << std::endl;
+						}
+					}
+					else {
+						std::cout << "Error - must be an integer..." << std::endl;
+					}
+
+				} while(searchItemStr != "EXIT" || searchItemStr != "exit");
 				break;
 			}
 			case '0': {

@@ -8,7 +8,7 @@ template<class ItemType>
 void ArrayBag<ItemType>::bubbleSort()
 {
    for (int i{0}; i < itemCount - 1; i++) {
-      for (int x{0}; j < itemCount - i - 1; x++) {
+      for (int x{0}; x < itemCount - i - 1; x++) {
          if(items[x] > items[x+1]) 
             std::swap(items[x], items[x+1]); //swap items[a] with items [a+1]
       }
@@ -22,9 +22,27 @@ bool ArrayBag<ItemType>::binarySearchIterative()
 }  // end isEmpty
 
 template<class ItemType>
-bool ArrayBag<ItemType>::binarySearchRecursive()
+bool ArrayBag<ItemType>::binarySearchRecursive(const ItemType searchItem, ItemType minIndex, ItemType maxIndex, ItemType newIndex)
 {
-	return true;
+   
+   if (minIndex > maxIndex) {
+      return false;
+   }
+   else {
+      if (searchItem == items[newIndex]) {
+         return true;
+      }
+      else {
+         if (searchItem < items[newIndex]) {
+            return binarySearchRecursive(searchItem, 0, itemCount, (newIndex - 1));
+         }
+         else {
+            return binarySearchRecursive(searchItem, 0, itemCount, (newIndex + 1));
+         }
+      } 
+   }
+   
+	return false;
 }  // end isEmpty
 
 ///////////////////////
