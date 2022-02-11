@@ -130,8 +130,10 @@ int main()
 					scanf("%s", &searchItemStr);
 					fflush(stdin);
 
+					bool isFound = bag.binarySearchRecursive(stoi(searchItemStr), 0, 0);
+
 					if (isInt(searchItemStr)) {
-						if (bag.binarySearchRecursive(stoi(searchItemStr), 0, bag.getCurrentSize(), (bag.getCurrentSize() / 2))) {
+						if (isFound) {
 							std::cout << "Success! We found " << searchItemStr << " in the bag." << std::endl;
 						}
 						else {
