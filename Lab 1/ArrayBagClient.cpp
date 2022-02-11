@@ -64,16 +64,20 @@ int main()
 						// Check if newItem is an integer
 						if (isInt(newItem)) {
 
-							// Return true if bag contains newItem
-							if (bag.contains(stoi(newItem))) {
-
-								// Add item and display message of failure
+							// Check if newItem is already in bag, else display error message
+							if (!bag.contains(stoi(newItem))) {
+								
+								// Add item to bag. Returns false if bag is full, display error message in that case
+								if (bag.add(stoi(newItem))) {
+									std::cout << "Success! " << newItem << " has been added to the bag." << std::endl;
+								}
+								else {
+									std::cout << "Item not added. The bag is full..." << std::endl;
+								}
+							}	
+							else { 
+								// Item is already in bag, display message of failure
 								std::cout << newItem << " this item is already in the bag..." << std::endl;
-							}
-							else {
-								// newItem is not in the bag, add newItem to bag
-								bag.add(stoi(newItem));
-								std::cout << "Success! " << newItem << " has been added to the bag." << std::endl;
 							}
 						}
 						else {
