@@ -9,7 +9,7 @@ class BagInterface
 public:
 	// Example of adding a new method
 	virtual void bubbleSort() = 0;
-	virtual bool binarySearchIterative() = 0;
+	virtual bool binarySearchIterative(const ItemType& searchItem) = 0;
 	virtual bool binarySearchRecursiveHelper(const ItemType& searchItem) = 0;
 	virtual bool binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex) = 0;
 	

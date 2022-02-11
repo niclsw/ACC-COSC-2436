@@ -29,7 +29,7 @@ int main()
 		std::cout << "(0) End Program" << std::endl;
 		std::cout << "Enter Option: ";
 		scanf("%c", &input); // scanf will only take the first char the user enters
-		fflush(stdin); // flush output buffer stream
+		fflush(stdin); // flush output buffer stream to keep the menu from taking in leftover input from user
 
 		switch (input) {
 			case '1': {
@@ -147,8 +147,43 @@ int main()
 				break;
 			}
 			case '5': {
-				// INCOMPLETE
+				// COMPLETE
 				// CASE 5 : Iterative Search
+
+				std::string searchItemStr;
+				bool isFound;
+
+				// check if bag is sorted, else send user back to main menu to sort the bag
+				if (isSorted) { 
+					do {
+						std::cout << "Enter EXIT to go back to main menu" << std::endl;
+						std::cout << "Enter an integer to search for: ";
+						std::getline(std::cin, searchItemStr);
+
+						// if user entry does not equal EXIT continue
+						//   check if search item is an int, else make user try again
+						if (searchItemStr != "EXIT") { 
+							if (isInt(searchItemStr)) {
+
+								isFound = bag.binarySearchIterative(stoi(searchItemStr));
+
+								// get boolean value if item is found in bag
+								if (isFound) {
+									std::cout << "Success! We found " << searchItemStr << " in the bag." << std::endl;
+								}
+								else {
+									std::cout << "We could not find " << searchItemStr << " in the bag." << std::endl;
+								}
+							}
+							else {
+								std::cout << "Error - must be an integer..." << std::endl;
+							}
+						}
+					} while (searchItemStr != "EXIT");
+				}
+				else {
+					std::cout << "The bag must be sorted before you can search for an item..." << std::endl;
+				}
 				break;
 			}
 			case '6': {
@@ -159,14 +194,15 @@ int main()
 				std::string searchItemStr;
 				bool isFound;
 
-				if (isSorted) { // check if bag is sorted, else send user back to main menu to sort the bag
+				// check if bag is sorted, else send user back to main menu to sort the bag
+				if (isSorted) { 
 					do {
 						std::cout << "Enter EXIT to go back to main menu" << std::endl;
 						std::cout << "Enter an integer to search for: ";
 						std::getline(std::cin, searchItemStr);
 
 						// if user entry does not equal EXIT continue
-						// check if search item is an int, else make user try again
+						//   check if search item is an int, else make user try again
 						if (searchItemStr != "EXIT") { 
 							if (isInt(searchItemStr)) { 
 
@@ -193,11 +229,18 @@ int main()
 				break;
 			}
 			case '0': {
-				// End Program
+				// COMPLETE
+				// CASE 0 : End Program
+
+				std::cout << std::endl;
+				std::cout << "Program Ending..." << std::endl;
+
 				return 1;
 			}
 			default: {
-				// Anything other than acceptable input
+				// COMPLETE
+				// DEFAULT : Anything other than acceptable input
+
 				std::cout << std::endl;
 				std::cout << "Error - Please pick a valid option from the menu..." << std::endl;
 				break;
@@ -208,6 +251,16 @@ int main()
    return 0;
    
 }  // end main
+
+/******************************************************************************/
+/* Function:   isInt
+/* Inputs:     reference string
+/* Outputs:    Boolean value ( True / False)
+/*                     
+/* Purpose:    This function go through entire string using lamba functions to 
+/*             check if user entered all integers in a string. It will return
+/* 			   true if all chars are ints and false if one or more is not a int 
+/******************************************************************************/
 
 bool isInt(const std::string& str) {
 

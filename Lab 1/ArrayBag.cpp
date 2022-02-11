@@ -3,7 +3,15 @@
 #include <cstddef>
 #include <vector>
 
-// Example of adding a new method
+/******************************************************************************/
+/* Function:   bubbleSort
+/* Inputs:     N/A
+/* Outputs:    N/A
+/*                     
+/* Purpose:    This function sorts the item bag from lowest to highest number and
+/*             uses std::swap to switch the values.
+/******************************************************************************/
+
 template<class ItemType>
 void ArrayBag<ItemType>::bubbleSort()
 {
@@ -13,13 +21,54 @@ void ArrayBag<ItemType>::bubbleSort()
             std::swap(items[x], items[x+1]); //swap items[a] with items [a+1]
       }
    }
-}  // end isEmpty
+}  // end bubbleSort
+
+/******************************************************************************/
+/* Function:   binarySearchIterative
+/* Inputs:     reference string
+/* Outputs:    Boolean value ( True / False)
+/*                     
+/* Purpose:    This function uses an iterative approach to search the item bag 
+/*             for the searched item. It will return a true value if found and 
+/* 			   a false value if not found.
+/******************************************************************************/
 
 template<class ItemType>
-bool ArrayBag<ItemType>::binarySearchIterative()
+bool ArrayBag<ItemType>::binarySearchIterative(const ItemType& searchItem)
 {
-	return true;
-}  // end isEmpty
+   // Declare variables for use
+   int minIndex = 0;
+   int maxIndex = itemCount - 1;
+
+   // while minIndex <= maxIndex
+   while (minIndex <= maxIndex) {
+
+      // declare the index we are looking at
+      int index = minIndex + (maxIndex - minIndex) / 2;
+
+      if (searchItem = items[index]) {
+         return true;
+      }
+      else if(searchItem < items[index]) {
+         maxIndex = index - 1;
+      }
+      else {
+         minIndex = index + 1;
+      }
+   }
+
+	return false;
+}  // end binarySearchIterative
+
+/******************************************************************************/
+/* Function:   binarySearchRecursiveHelper
+/* Inputs:     reference string
+/* Outputs:    Boolean value ( True / False)
+/*                     
+/* Purpose:    This function is used as a helper to binarySearchRecursive. This
+/*             function determines the base indexs that will be used in the rec-
+/* 			   ursive version of a binary search. 
+/******************************************************************************/
 
 template<class ItemType>
 bool ArrayBag<ItemType>::binarySearchRecursiveHelper(const ItemType& searchItem) {
@@ -29,7 +78,17 @@ bool ArrayBag<ItemType>::binarySearchRecursiveHelper(const ItemType& searchItem)
    bool found = binarySearchRecursive(searchItem, minIndex, maxIndex);
 
    return found;
-}
+} // end binarySearchRecursiveHelper
+
+/******************************************************************************/
+/* Function:   binarySearchRecursive
+/* Inputs:     reference string, int minIndex, int maxIndex
+/* Outputs:    Boolean value ( True / False)
+/*                     
+/* Purpose:    This function searches the item bag recursively to find the item
+/*             the user is searching for. It returns a boolean value to the hel-
+/* 			   per function to tell the user if the item was found.
+/******************************************************************************/
 
 template<class ItemType>
 bool ArrayBag<ItemType>::binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex)
