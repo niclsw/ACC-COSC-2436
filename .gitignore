@@ -4,6 +4,8 @@
 # User
 **/SourceCodeForStudents_7.0/*
 **/Testing/*
+**/.vscode/**
+**.json
 
 # Compiled Object files
 *.slo

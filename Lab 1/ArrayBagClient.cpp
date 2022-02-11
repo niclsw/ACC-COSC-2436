@@ -46,36 +46,45 @@ int main()
 				break;
 			}
 			case '2': {
-				// INCOMPLETE
+				// COMPLETE
 				// CASE 2 : Add value to bag
-
+				
+				// declare variables to be used in this case
 				std::string newItem;
 
-				// Do while newItem is not an integer
-				if (!isSorted) {
-					std::cout << "The bag must be sorted before an item is added" << std::endl;
-				}
-				else {
-					do {
-						std::cout << "Enter an Integer: ";
-						std::cin >> newItem;
+				// Do while newItem is not "EXIT"
+				do {
+					std::cout << "Type EXIT to return to the main menu" << std::endl;
+					std::cout << "Enter and Integer to add: ";
+					std::cin >> newItem;
 
-						// If item is not int display error message
-						if (!isInt(newItem))
-							std::cout << "Error - new item must be an integer..." << std::endl;
-						// If item is already in bag display error message
-						else if (bag.contains(stoi(newItem)))
-							std::cout << "Error - this item is already in the bag..." << std::endl;
-						else if (!bag.add(stoi(newItem)))
-							std::cout << "Error - the bag is full..." << std::endl;
+					// Check if user entered something other than exit
+					if (newItem != "EXIT") {
 
-					} while (!isInt(newItem) && bag.contains(stoi(newItem)) && !bag.add(stoi(newItem)));
-				}
-				
-				// Add new item to bag using inline if-else
-				// if isSorted = true add item to bag
-				// else do nothing
-				isSorted ? bag.add(stoi(newItem)) : 0;
+						// Check if newItem is an integer
+						if (isInt(newItem)) {
+
+							// Return true if bag contains newItem
+							if (bag.contains(stoi(newItem))) {
+
+								// Add item and display message of failure
+								std::cout << newItem << " this item is already in the bag..." << std::endl;
+							}
+							else {
+								// newItem is not in the bag, add newItem to bag
+								bag.add(stoi(newItem));
+								std::cout << "Success! " << newItem << " has been added to the bag." << std::endl;
+							}
+						}
+						else {
+							std::cout << "Item must be an integer..." << std::endl;
+						}
+					}
+		
+				} while(newItem != "EXIT");
+
+				// Bag could not be sorted so set to false
+				isSorted = false;
 				
 				break;
 			}
@@ -120,8 +129,6 @@ int main()
 				// Bag could not be sorted so set to false
 				isSorted = false;
 
-				// break from case and endl to create some space
-				std::cout << std::endl;
 				break;
 			}
 			case '4': {
