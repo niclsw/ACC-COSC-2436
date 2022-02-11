@@ -22,21 +22,31 @@ bool ArrayBag<ItemType>::binarySearchIterative()
 }  // end isEmpty
 
 template<class ItemType>
-bool ArrayBag<ItemType>::binarySearchRecursive(const ItemType& searchItem, ItemType pivotIndex, ItemType count)
-{
-   pivotIndex = (getCurrentSize() / 2) + count;
+bool ArrayBag<ItemType>::binarySearchRecursiveHelper(const ItemType& searchItem) {
 
-   if (searchItem == pivotIndex) {
-      return true;
+   int minIndex = 0;
+   int maxIndex = itemCount - 1;
+   bool found = binarySearchRecursive(searchItem, minIndex, maxIndex);
+
+   return found;
+}
+
+template<class ItemType>
+bool ArrayBag<ItemType>::binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex)
+{
+   bool found = false;
+   if (minIndex == maxIndex) {
+      return false;
    }
    else {
-      if (searchItem < pivotIndex)
-         return binarySearchRecursive(searchItem, pivotIndex, count++);
+      int index = minIndex + (maxIndex - minIndex) / 2;
+      if (searchItem == items[index])
+         return true;
+      else if (searchItem < items[index])
+         return binarySearchRecursive(searchItem, minIndex, maxIndex - 1);
       else
-         return binarySearchRecursive(searchItem, pivotIndex, count--);
+         return binarySearchRecursive(searchItem, minIndex + 1, maxIndex);
    }
-   
-	return false;
 }  // end isEmpty
 
 ///////////////////////

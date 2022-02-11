@@ -28,11 +28,14 @@ int main()
 		std::cout << "(6) Recursive Search" << std::endl;
 		std::cout << "(0) End Program" << std::endl;
 		std::cout << "Enter Option: ";
-		scanf("%c", &input); //
+		scanf("%c", &input); // scanf will only take the first char the user enters
 		fflush(stdin); // flush output buffer stream
 
 		switch (input) {
 			case '1': {
+				// COMPLETE
+				// Display contents of bag
+				
 				// Assign displayBag to the bag vector
 				auto displayBag = bag.toVector();
 
@@ -43,7 +46,9 @@ int main()
 				break;
 			}
 			case '2': {
-				// Add Value to Bag
+				// INCOMPLETE
+				// CASE 2 : Add value to bag
+
 				std::string newItem;
 
 				// Do while newItem is not an integer
@@ -75,10 +80,10 @@ int main()
 				break;
 			}
 			case '3': {
-				// Remove an item from the bag
-
-				// EXIT is displaying new item must be an integer FIX IT ************************
-
+				// COMPLETE
+				// CASE 3 : Remove an item from the bag
+				
+				// declare variables to be used in this case
 				std::string removedItem;
 
 				// Do while removedItem is not "EXIT"
@@ -87,19 +92,30 @@ int main()
 					std::cout << "Enter and Integer to remove: ";
 					std::cin >> removedItem;
 
-					// removedItem is not in bag, display error
-					if (!bag.contains(stoi(removedItem))) {
-						std::cout << "This integer is not in the bag..." << std::endl;
+					// Check if user entered something other than exit
+					if (removedItem != "EXIT") {
+
+						// Check if removedItem is an integer
+						if (isInt(removedItem)) {
+
+							// return true if bag contains removedItem
+							if (bag.contains(stoi(removedItem))) {
+
+								//Remove item and display message of success
+								bag.remove(stoi(removedItem));
+								std::cout << removedItem << " has been removed from the bag..." << std::endl;
+							}
+							else {
+								// removedItem is not in the bag, display error message
+								std::cout << "This item is not in the bag..." << std::endl;
+							}
+						}
+						else {
+							std::cout << "Item must be an integer..." << std::endl;
+						}
 					}
-					// else, no errors, remove the item from the bag
-					else if (!(removedItem == "EXIT") || !(removedItem == "exit")) {
-						bag.remove(stoi(removedItem));
-					}
-					// (!isInt(removedItem))
-					else {
-						std::cout << "Error - new item must be an integer..." << std::endl;
-					}
-				} while(!(removedItem == "EXIT") || !(removedItem == "exit"));
+		
+				} while(removedItem != "EXIT");
 
 				// Bag could not be sorted so set to false
 				isSorted = false;
@@ -109,42 +125,60 @@ int main()
 				break;
 			}
 			case '4': {
-				// Call bubbleSort()
+				// COMPLETE
+				// CASE 4 : Sort the bag
+
 				bag.bubbleSort();
 				isSorted = true;
 
-				std::cout << "The bag has been sorted...";
-				// break from case and endl to create some space
-				std::cout << std::endl;
+				std::cout << "The bag has been sorted..." << std::endl;
+
 				break;
 			}
 			case '5': {
-				// Iterative Search
+				// INCOMPLETE
+				// CASE 5 : Iterative Search
 				break;
 			}
 			case '6': {
+				// COMPLETE
+				// CASE 6 : Binary Recursive Search
+
+				// Declare variables to be used in the recursive search
 				std::string searchItemStr;
+				bool isFound;
 
-				do {
-					std::cout << "Enter an integer to search for: ";
-					scanf("%s", &searchItemStr);
-					fflush(stdin);
+				if (isSorted) { // check if bag is sorted, else send user back to main menu to sort the bag
+					do {
+						std::cout << "Enter EXIT to go back to main menu" << std::endl;
+						std::cout << "Enter an integer to search for: ";
+						std::getline(std::cin, searchItemStr);
 
-					bool isFound = bag.binarySearchRecursive(stoi(searchItemStr), 0, 0);
+						// if user entry does not equal EXIT continue
+						// check if search item is an int, else make user try again
+						if (searchItemStr != "EXIT") { 
+							if (isInt(searchItemStr)) { 
 
-					if (isInt(searchItemStr)) {
-						if (isFound) {
-							std::cout << "Success! We found " << searchItemStr << " in the bag." << std::endl;
+								// get boolean value if item is found in bag
+								isFound = bag.binarySearchRecursiveHelper(stoi(searchItemStr)); 
+
+								if (isFound) {
+									std::cout << "Success! We found " << searchItemStr << " in the bag." << std::endl;
+								}
+								else {
+									std::cout << "We could not find " << searchItemStr << " in the bag." << std::endl;
+								}
+							}
+							else {
+								std::cout << "Error - must be an integer..." << std::endl;
+							}
 						}
-						else {
-							std::cout << "We could not find " << searchItemStr << " in the bag." << std::endl;
-						}
-					}
-					else {
-						std::cout << "Error - must be an integer..." << std::endl;
-					}
 
-				} while(searchItemStr != "EXIT" || searchItemStr != "exit");
+					} while(searchItemStr != "EXIT");
+				}
+				else {
+					std::cout << "The bag must be sorted before you can search for an item..." << std::endl;
+				}
 				break;
 			}
 			case '0': {

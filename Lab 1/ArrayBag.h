@@ -22,7 +22,8 @@ public:
 	// Example of adding a new method
 	void bubbleSort();
 	bool binarySearchIterative();
-	bool binarySearchRecursive(const ItemType& searchItem, ItemType pivotIndex, ItemType count);
+	bool binarySearchRecursiveHelper(const ItemType& searchItem);
+	bool binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex);
 	int getCurrentSize() const;
 	bool isEmpty() const;
 	bool add(const ItemType& newEntry);
