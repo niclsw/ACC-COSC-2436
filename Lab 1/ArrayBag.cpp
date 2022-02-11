@@ -47,9 +47,10 @@ bool ArrayBag<ItemType>::binarySearchRecursive(const ItemType& searchItem, ItemT
       else
          return binarySearchRecursive(searchItem, minIndex + 1, maxIndex);
    }
-}  // end isEmpty
+}  // end binarySearchRecursive
 
-///////////////////////
+/////////////////////// BEGIN DEFAULT CODE /////////////////////////////////////
+
 template<class ItemType>
 ArrayBag<ItemType>::ArrayBag(): itemCount(0), maxItems(DEFAULT_CAPACITY)
 {
