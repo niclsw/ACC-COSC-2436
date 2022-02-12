@@ -5,6 +5,13 @@
 #include "ArrayBag.h"
 
 bool isInt(const std::string& str);
+void displayContents(ArrayBag<int>& bag);
+void addItems(ArrayBag<int>& bag);
+void removeItems(ArrayBag<int>& bag);
+void sortBag(ArrayBag<int>& bag);
+void binaryIterativeSearch(ArrayBag<int>& bag, bool isSorted);
+void binaryRecursiveSearch(ArrayBag<int>& bag, bool isSorted);
+int endProgram();
 
 int main()
 {
@@ -19,7 +26,11 @@ int main()
 	}  // end for
 
 	do {
-		std::cout << "============ Bag Array : Menu ============" << std::endl;
+		// flush output buffer stream to keep the menu from taking in leftover input from user
+		// Usefull once the user starts going through the menu
+		fflush(stdin); 
+
+		std::cout << "\n============ Bag Array : Menu ============" << std::endl;
 		std::cout << "(1) Display Contents of Bag" << std::endl;
 		std::cout << "(2) Add Value" << std::endl;
 		std::cout << "(3) Remove Value" << std::endl;
@@ -29,220 +40,45 @@ int main()
 		std::cout << "(0) End Program" << std::endl;
 		std::cout << "Enter Option: ";
 		scanf("%c", &input); // scanf will only take the first char the user enters
-		fflush(stdin); // flush output buffer stream to keep the menu from taking in leftover input from user
+		fflush(stdin); 
 
 		switch (input) {
 			case '1': {
-				// COMPLETE
-				// Display contents of bag
-				
-				// Assign displayBag to the bag vector
-				auto displayBag = bag.toVector();
-
-				// Display Bag Contents
-				for (int i{0}; i < displayBag.size(); i++) {
-					std::cout << displayBag[i] << std::endl;
-				}
+				displayContents(bag);
 				break;
 			}
 			case '2': {
-				// COMPLETE
-				// CASE 2 : Add value to bag
-				
-				// declare variables to be used in this case
-				std::string newItem;
-
-				// Do while newItem is not "EXIT"
-				do {
-					std::cout << "Type EXIT to return to the main menu" << std::endl;
-					std::cout << "Enter and Integer to add: ";
-					std::cin >> newItem;
-
-					// Check if user entered something other than exit
-					if (newItem != "EXIT") {
-
-						// Check if newItem is an integer
-						if (isInt(newItem)) {
-
-							// Check if newItem is already in bag, else display error message
-							if (!bag.contains(stoi(newItem))) {
-								
-								// Add item to bag. Returns false if bag is full, display error message in that case
-								if (bag.add(stoi(newItem))) {
-									std::cout << "Success! " << newItem << " has been added to the bag." << std::endl;
-								}
-								else {
-									std::cout << "Item not added. The bag is full..." << std::endl;
-								}
-							}	
-							else { 
-								// Item is already in bag, display message of failure
-								std::cout << newItem << " this item is already in the bag..." << std::endl;
-							}
-						}
-						else {
-							std::cout << "Item must be an integer..." << std::endl;
-						}
-					}
-		
-				} while(newItem != "EXIT");
-
-				// Bag could not be sorted so set to false
+				addItems(bag);
 				isSorted = false;
-				
 				break;
 			}
 			case '3': {
-				// COMPLETE
-				// CASE 3 : Remove an item from the bag
-				
-				// declare variables to be used in this case
-				std::string removedItem;
-
-				// Do while removedItem is not "EXIT"
-				do {
-					std::cout << "Type EXIT to return to the main menu" << std::endl;
-					std::cout << "Enter and Integer to remove: ";
-					std::cin >> removedItem;
-
-					// Check if user entered something other than exit
-					if (removedItem != "EXIT") {
-
-						// Check if removedItem is an integer
-						if (isInt(removedItem)) {
-
-							// return true if bag contains removedItem
-							if (bag.contains(stoi(removedItem))) {
-
-								//Remove item and display message of success
-								bag.remove(stoi(removedItem));
-								std::cout << removedItem << " has been removed from the bag..." << std::endl;
-							}
-							else {
-								// removedItem is not in the bag, display error message
-								std::cout << "This item is not in the bag..." << std::endl;
-							}
-						}
-						else {
-							std::cout << "Item must be an integer..." << std::endl;
-						}
-					}
-		
-				} while(removedItem != "EXIT");
-
-				// Bag could not be sorted so set to false
+				removeItems(bag);
 				isSorted = false;
-
 				break;
 			}
 			case '4': {
-				// COMPLETE
-				// CASE 4 : Sort the bag
-
-				bag.bubbleSort();
+				sortBag(bag);
 				isSorted = true;
-
-				std::cout << "The bag has been sorted..." << std::endl;
-
 				break;
 			}
 			case '5': {
-				// COMPLETE
-				// CASE 5 : Iterative Search
-
-				std::string searchItemStr;
-				bool isFound;
-
-				// check if bag is sorted, else send user back to main menu to sort the bag
-				if (isSorted) { 
-					do {
-						std::cout << "Enter EXIT to go back to main menu" << std::endl;
-						std::cout << "Enter an integer to search for: ";
-						std::getline(std::cin, searchItemStr);
-
-						// if user entry does not equal EXIT continue
-						//   check if search item is an int, else make user try again
-						if (searchItemStr != "EXIT") { 
-							if (isInt(searchItemStr)) {
-
-								isFound = bag.binarySearchIterative(stoi(searchItemStr));
-
-								// get boolean value if item is found in bag
-								if (isFound) {
-									std::cout << "Success! We found " << searchItemStr << " in the bag." << std::endl;
-								}
-								else {
-									std::cout << "We could not find " << searchItemStr << " in the bag." << std::endl;
-								}
-							}
-							else {
-								std::cout << "Error - must be an integer..." << std::endl;
-							}
-						}
-					} while (searchItemStr != "EXIT");
-				}
-				else {
-					std::cout << "The bag must be sorted before you can search for an item..." << std::endl;
-				}
+				binaryIterativeSearch(bag, isSorted);
 				break;
 			}
 			case '6': {
-				// COMPLETE
-				// CASE 6 : Binary Recursive Search
-
-				// Declare variables to be used in the recursive search
-				std::string searchItemStr;
-				bool isFound;
-
-				// check if bag is sorted, else send user back to main menu to sort the bag
-				if (isSorted) { 
-					do {
-						std::cout << "Enter EXIT to go back to main menu" << std::endl;
-						std::cout << "Enter an integer to search for: ";
-						std::getline(std::cin, searchItemStr);
-
-						// if user entry does not equal EXIT continue
-						//   check if search item is an int, else make user try again
-						if (searchItemStr != "EXIT") { 
-							if (isInt(searchItemStr)) { 
-
-								// get boolean value if item is found in bag
-								isFound = bag.binarySearchRecursiveHelper(stoi(searchItemStr)); 
-
-								if (isFound) {
-									std::cout << "Success! We found " << searchItemStr << " in the bag." << std::endl;
-								}
-								else {
-									std::cout << "We could not find " << searchItemStr << " in the bag." << std::endl;
-								}
-							}
-							else {
-								std::cout << "Error - must be an integer..." << std::endl;
-							}
-						}
-
-					} while(searchItemStr != "EXIT");
-				}
-				else {
-					std::cout << "The bag must be sorted before you can search for an item..." << std::endl;
-				}
+				binaryRecursiveSearch(bag, isSorted);
 				break;
 			}
 			case '0': {
-				// COMPLETE
-				// CASE 0 : End Program
-
-				std::cout << std::endl;
-				std::cout << "Program Ending..." << std::endl;
-
-				return 1;
+				endProgram();
+				break;
 			}
 			default: {
 				// COMPLETE
 				// DEFAULT : Anything other than acceptable input
 
-				std::cout << std::endl;
-				std::cout << "Error - Please pick a valid option from the menu..." << std::endl;
+				std::cout << "\nError - Please pick a valid option from the menu..." << std::endl;
 				break;
 			}
 		}
@@ -276,6 +112,269 @@ bool isInt(const std::string& str) {
     }
 
     return isInt;
+} // end isInt
+
+/******************************************************************************/
+/* Function:   displayContents
+/* Inputs:     ArrayBag<int> bag object
+/* Outputs:    Contents of Bag
+/*                     
+/* Purpose:    This function displays the contents of the bag to the user
+/******************************************************************************/
+
+void displayContents(ArrayBag<int>& bag) {
+	auto displayBag = bag.toVector();
+
+	// Display Bag Contents
+	for (int i{0}; i < displayBag.size(); i++) {
+		std::cout << displayBag[i] << std::endl;
+	}
+} //end displayContents
+
+/******************************************************************************/
+/* Function:  addItems
+/* Inputs:    ArrayBag<int> bag object
+/* Outputs:   N/A
+/*                     
+/* Purpose:   This function gives the user the ability to add items to the
+/*            bag. It will call isInt to make sure the item entered is an
+/* 			  integer. It will also check to make sure the item is not already
+/*  		  in the bag.
+/******************************************************************************/
+
+void addItems(ArrayBag<int>& bag) {
+	// COMPLETE
+	// CASE 2 : Add value to bag
+	
+	// declare variables to be used in this case
+	std::string newItem;
+
+	// Do while newItem is not "MENU"
+	do {
+		std::cout << "\nAdd Value to Bag - Enter 'MENU' to exit" << std::endl;
+		std::cout << "Enter and Integer to add: ";
+		std::cin >> newItem;
+
+		// Check if user entered something other than MENU
+		if (newItem != "MENU") {
+
+			// Check if newItem is an integer
+			if (isInt(newItem)) {
+
+				// Check if newItem is already in bag, else display error message
+				if (!bag.contains(stoi(newItem))) {
+					
+					// Add item to bag. Returns false if bag is full, display error message in that case
+					if (bag.add(stoi(newItem))) {
+						std::cout << "\nSuccess! " << newItem << " has been added to the bag." << std::endl;
+					}
+					else {
+						std::cout << "\nItem not added. The bag is full..." << std::endl;
+					}
+				}	
+				else { 
+					// Item is already in bag, display message of failure
+					std::cout << newItem << " this item is already in the bag..." << std::endl;
+				}
+			}
+			else {
+				std::cout << "\nItem must be an integer..." << std::endl;
+			}
+		}
+
+	} while(newItem != "MENU");
+
+	// Bag could not be sorted so set to false
+
 }
 
+/******************************************************************************/
+/* Function:   removeItems
+/* Inputs:     ArrayBag<int> bag object
+/* Outputs:    N/A
+/*                     
+/* Purpose:    This function gives the user the option to remove certain items
+/*             from the bag. It will call isInt to make sure the item entered
+/* 			   is an integer. It will also check to make sure that item is in
+/*			   the bag.
+/******************************************************************************/
 
+void removeItems(ArrayBag<int>& bag) {
+	// COMPLETE
+	// CASE 3 : Remove an item from the bag
+	
+	// declare variables to be used in this case
+	std::string removedItem;
+
+	// Do while removedItem is not "MENU"
+	do {
+		std::cout << "\nRemove Value from Bag - Enter 'MENU' to exit" << std::endl;
+		std::cout << "Enter and Integer to remove: ";
+		std::cin >> removedItem;
+
+		// Check if user entered something other than MENU
+		if (removedItem != "MENU") {
+
+			// Check if removedItem is an integer
+			if (isInt(removedItem)) {
+
+				// return true if bag contains removedItem
+				if (bag.contains(stoi(removedItem))) {
+
+					//Remove item and display message of success
+					bag.remove(stoi(removedItem));
+					std::cout << "Success! " << removedItem << " has been removed from the bag..." << std::endl;
+				}
+				else {
+					// removedItem is not in the bag, display error message
+					std::cout << "\nError - " << removedItem << " is not in the bag..." << std::endl;
+				}
+			}
+			else {
+				std::cout << "\nError - Item must be an integer..." << std::endl;
+			}
+		}
+
+	} while(removedItem != "MENU");
+
+	// Bag could not be sorted so set to false
+
+}
+
+/******************************************************************************/
+/* Function:   sortBag
+/* Inputs:     ArrayBag<int> bag object
+/* Outputs:    N/A
+/*                     
+/* Purpose:    This function will sort the bag. No error checking required.
+/******************************************************************************/
+
+void sortBag(ArrayBag<int>& bag) {
+	// COMPLETE
+	// CASE 4 : Sort the bag
+
+	bag.bubbleSort();
+
+	std::cout << "\nSuccess! The bag has been sorted" << std::endl;
+}
+
+/******************************************************************************/
+/* Function:   binaryIterativeSearch
+/* Inputs:     ArrayBag<int> bag object & boolean isSorted
+/* Outputs:    N/A
+/*                     
+/* Purpose:    This function will search the bag for an item the user picks
+/*             using an interative approach. It will error check to make sure
+/* 			   the user enters an integer by calling isInt.
+/******************************************************************************/
+
+void binaryIterativeSearch(ArrayBag<int>& bag, bool isSorted) {
+	// COMPLETE
+	// CASE 5 : Iterative Search
+
+	std::string searchItemStr;
+	bool isFound;
+
+	// check if bag is sorted, else send user back to main menu to sort the bag
+	if (isSorted) { 
+		do {
+			std::cout << "\nIterative Search - Enter 'MENU' to exit" << std::endl;
+			std::cout << "Enter an integer to search for: ";
+			std::getline(std::cin, searchItemStr);
+
+			// if user entry does not equal MENU continue
+			//   check if search item is an int, else make user try again
+			if (searchItemStr != "MENU") { 
+				if (isInt(searchItemStr)) {
+
+					isFound = bag.binarySearchIterative(stoi(searchItemStr));
+
+					// get boolean value if item is found in bag
+					if (isFound) {
+						std::cout << "\nSuccess! We found " << searchItemStr << " in the bag." << std::endl;
+					}
+					else {
+						std::cout << "\nWe could not find " << searchItemStr << " in the bag." << std::endl;
+					}
+				}
+				else {
+					std::cout << "\nError - must be an integer..." << std::endl;
+				}
+			}
+		} while (searchItemStr != "MENU");
+	}
+	else {
+		std::cout << "\nError - The bag must be sorted before you can search for an item..." << std::endl;
+	}
+}
+
+/******************************************************************************/
+/* Function:   binarySearchRecursive
+/* Inputs:     ArrayBag<int> bag object, boolean isSorted
+/* Outputs:    N/A
+/*                     
+/* Purpose:    This function searches the bag for an item the user chooses
+/*             recursively. It will also error check to make sure the user
+/* 			   enters an integer to search for.
+/******************************************************************************/
+
+void binaryRecursiveSearch(ArrayBag<int>& bag, bool isSorted) {
+	// COMPLETE
+	// CASE 6 : Binary Recursive Search
+
+	// Declare variables to be used in the recursive search
+	std::string searchItemStr;
+	bool isFound;
+
+	// check if bag is sorted, else send user back to main menu to sort the bag
+	if (isSorted) { 
+		do {
+			std::cout << "\nRecursive Search - Enter 'MENU' to exit" << std::endl;
+			std::cout << "Enter an integer to search for: ";
+			std::getline(std::cin, searchItemStr);
+
+			// if user entry does not equal MENU continue
+			//   check if search item is an int, else make user try again
+			if (searchItemStr != "MENU") { 
+				if (isInt(searchItemStr)) { 
+
+					// get boolean value if item is found in bag
+					isFound = bag.binarySearchRecursiveHelper(stoi(searchItemStr)); 
+
+					if (isFound) {
+						std::cout << "\nSuccess! We found " << searchItemStr << " in the bag." << std::endl;
+					}
+					else {
+						std::cout << "\nWe could not find " << searchItemStr << " in the bag." << std::endl;
+					}
+				}
+				else {
+					std::cout << "\nError - must be an integer..." << std::endl;
+				}
+			}
+
+		} while(searchItemStr != "MENU");
+	}
+	else {
+		std::cout << "\nError - The bag must be sorted before you can search for an item..." << std::endl;
+	}
+}
+
+/******************************************************************************/
+/* Function:   endProgram
+/* Inputs:     N/A
+/* Outputs:    N/A
+/*                     
+/* Purpose:    This function clears the screen and ends the program.	   
+/******************************************************************************/
+
+int endProgram() {
+	// COMPLETE
+	// CASE 0 : End Program
+
+	// Clear screen and announce the program is ending
+	std::cout << std::string(100, '\n'); 
+	std::cout << "\nProgram Ending..." << std::endl;
+
+	return 1;
+}
