@@ -257,20 +257,25 @@ int main()
 /* Inputs:     reference string
 /* Outputs:    Boolean value ( True / False)
 /*                     
-/* Purpose:    This function go through entire string using lamba functions to 
+/* Purpose:    This function go through entire string using a for loop to 
 /*             check if user entered all integers in a string. It will return
 /* 			   true if all chars are ints and false if one or more is not a int 
 /******************************************************************************/
 
 bool isInt(const std::string& str) {
 
-	// return true if string is not empty
-	//  return true if string contains only char(s) equal to a digit 0-9
-	// 	 uses Lamba functions to check each char for digits. 
-	//    Instant false if char is not digit
-	return !str.empty() &&
-        std::find_if(str.begin(), str.end(),
-            [](unsigned char c) { return !std::isdigit(c); }) == str.end();
+	bool isInt = true;
+	int i = 0;
+
+	// Check if string user enters is an integer. As soon as it detects a char that
+	// is not an integer, it returns false
+    while (i < str.length() && isInt) {
+        if (!isdigit(str[i]))
+            isInt = false;
+        i++;
+    }
+
+    return isInt;
 }
 
 

@@ -46,7 +46,7 @@ bool ArrayBag<ItemType>::binarySearchIterative(const ItemType& searchItem)
       // declare the index we are looking at
       int index = minIndex + (maxIndex - minIndex) / 2;
 
-      if (searchItem = items[index]) {
+      if (searchItem == items[index]) {
          return true;
       }
       else if(searchItem < items[index]) {
