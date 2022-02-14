@@ -42,6 +42,7 @@ int main()
 		scanf("%c", &input); // scanf will only take the first char the user enters
 		fflush(stdin); 
 
+		// Switch case to drive the menu
 		switch (input) {
 			case '1': {
 				displayContents(bag);
@@ -104,7 +105,7 @@ bool isInt(const std::string& str) {
 	int i = 0;
 
 	// Check if string user enters is an integer. As soon as it detects a char that
-	// is not an integer, it returns false
+	// is not an integer, it sets isInt to false and ends the while loop.
     while (i < str.length() && isInt) {
         if (!isdigit(str[i]))
             isInt = false;
@@ -169,7 +170,7 @@ void addItems(ArrayBag<int>& bag) {
 						std::cout << "\nSuccess! " << newItem << " has been added to the bag." << std::endl;
 					}
 					else {
-						std::cout << "\nItem not added. The bag is full..." << std::endl;
+						std::cout << "\nError - " << newItem << " not added. The bag is full..." << std::endl;
 					}
 				}	
 				else { 
@@ -272,6 +273,7 @@ void binaryIterativeSearch(ArrayBag<int>& bag, bool isSorted) {
 	// COMPLETE
 	// CASE 5 : Iterative Search
 
+	// declare variables to be used in this case
 	std::string searchItemStr;
 	bool isFound;
 
@@ -377,4 +379,4 @@ int endProgram() {
 	std::cout << "\nProgram Ending..." << std::endl;
 
 	return 1;
-}
+} // end endProgram
