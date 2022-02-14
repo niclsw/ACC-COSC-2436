@@ -39,7 +39,8 @@ int main()
 		std::cout << "(6) Recursive Search" << std::endl;
 		std::cout << "(0) End Program" << std::endl;
 		std::cout << "Enter Option: ";
-		scanf("%c", &input); // scanf will only take the first char the user enters
+		//scanf("%1c", &input); // scanf will only take the first char the user enters
+		input = std::getchar();
 		fflush(stdin); 
 
 		// Switch case to drive the menu

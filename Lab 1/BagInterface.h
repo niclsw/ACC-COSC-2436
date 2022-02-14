@@ -7,10 +7,24 @@ template<class ItemType>
 class BagInterface
 {
 public:
-	// Example of adding a new method
+	// sorts the bag using a bubble method
+	// Input: N/A
+	// Returns: N/A
 	virtual void bubbleSort() = 0;
+
+	// searches the bag using an interative method
+	// Input: searchItem the item the user is searching for
+	// Returns: boolean value true if found and false if not found
 	virtual bool binarySearchIterative(const ItemType& searchItem) = 0;
+
+	// used as a helper to the recrusive search
+	// Input: searchItem the item the user is searching for
+	// Returns: boolean value true if found and false if not found
 	virtual bool binarySearchRecursiveHelper(const ItemType& searchItem) = 0;
+
+	// searches the bag using an recursive method
+	// Input: searchItem, indexminsize, indexmaxsize
+	// Returns: boolean value true if found and false if not found
 	virtual bool binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex) = 0;
 	
 	// Gets the current number of entries in this bag.
