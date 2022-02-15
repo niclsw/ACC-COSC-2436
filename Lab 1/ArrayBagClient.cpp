@@ -1,22 +1,24 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <cstring>
 #include <algorithm>
 #include "ArrayBag.h"
 
-bool isInt(const std::string& str);
 void displayContents(ArrayBag<int>& bag);
 void addItems(ArrayBag<int>& bag);
 void removeItems(ArrayBag<int>& bag);
 void sortBag(ArrayBag<int>& bag);
 void binaryIterativeSearch(ArrayBag<int>& bag, bool isSorted);
 void binaryRecursiveSearch(ArrayBag<int>& bag, bool isSorted);
+bool isInt(const std::string& str);
+void menu();
 int endProgram();
 
 int main()
 {
-	bool isSorted = false;
-	char input;
+	bool isSorted{false};
+	char input{};
 	ArrayBag<int> bag;
 	int items[] = {1, 33, 6, 9, 2, 65, 4, 29, 5, 8, 39, 88, 7, 25, 51, 3, 99, 14, 11, 10};
 		
@@ -30,17 +32,13 @@ int main()
 		// Usefull once the user starts going through the menu
 		fflush(stdin); 
 
-		std::cout << "\n============ Bag Array : Menu ============" << std::endl;
-		std::cout << "(1) Display Contents of Bag" << std::endl;
-		std::cout << "(2) Add Value" << std::endl;
-		std::cout << "(3) Remove Value" << std::endl;
-		std::cout << "(4) Sort The Bag" << std::endl;
-		std::cout << "(5) Iterative Search" << std::endl;
-		std::cout << "(6) Recursive Search" << std::endl;
-		std::cout << "(0) End Program" << std::endl;
-		std::cout << "Enter Option: ";
-		//scanf("%1c", &input); // scanf will only take the first char the user enters
-		input = std::getchar();
+		// Display the menu
+		menu();
+
+		// cout "Enter Choice: "
+		// scanf with a specifier and sub-specifier will only take the first char the user enters
+		scanf("%1c", &input); 
+		
 		fflush(stdin); 
 
 		// Switch case to drive the menu
@@ -102,8 +100,8 @@ int main()
 
 bool isInt(const std::string& str) {
 
-	bool isInt = true;
-	int i = 0;
+	bool isInt{true};
+	int i{0};
 
 	// Check if string user enters is an integer. As soon as it detects a char that
 	// is not an integer, it sets isInt to false and ends the while loop.
@@ -127,10 +125,15 @@ bool isInt(const std::string& str) {
 void displayContents(ArrayBag<int>& bag) {
 	auto displayBag = bag.toVector();
 
+	std::cout << "\nBag Contents: | ";
+
 	// Display Bag Contents
 	for (int i{0}; i < displayBag.size(); i++) {
-		std::cout << displayBag[i] << std::endl;
+		std::cout << displayBag[i] << " | ";
 	}
+
+	std::cout << std::endl;
+
 } //end displayContents
 
 /******************************************************************************/
@@ -149,7 +152,7 @@ void addItems(ArrayBag<int>& bag) {
 	// CASE 2 : Add value to bag
 	
 	// declare variables to be used in this case
-	std::string newItem;
+	std::string newItem{""};
 
 	// Do while newItem is not "MENU"
 	do {
@@ -206,7 +209,7 @@ void removeItems(ArrayBag<int>& bag) {
 	// CASE 3 : Remove an item from the bag
 	
 	// declare variables to be used in this case
-	std::string removedItem;
+	std::string removedItem{""};
 
 	// Do while removedItem is not "MENU"
 	do {
@@ -275,8 +278,8 @@ void binaryIterativeSearch(ArrayBag<int>& bag, bool isSorted) {
 	// CASE 5 : Iterative Search
 
 	// declare variables to be used in this case
-	std::string searchItemStr;
-	bool isFound;
+	std::string searchItemStr{""};
+	bool isFound{false};
 
 	// check if bag is sorted, else send user back to main menu to sort the bag
 	if (isSorted) { 
@@ -326,8 +329,8 @@ void binaryRecursiveSearch(ArrayBag<int>& bag, bool isSorted) {
 	// CASE 6 : Binary Recursive Search
 
 	// Declare variables to be used in the recursive search
-	std::string searchItemStr;
-	bool isFound;
+	std::string searchItemStr{""};
+	bool isFound{false};
 
 	// check if bag is sorted, else send user back to main menu to sort the bag
 	if (isSorted) { 
@@ -364,6 +367,28 @@ void binaryRecursiveSearch(ArrayBag<int>& bag, bool isSorted) {
 }
 
 /******************************************************************************/
+/* Function:   menu
+/* Inputs:     N/A
+/* Outputs:    N/A
+/*                     
+/* Purpose:    This function displays the menu options	   
+/******************************************************************************/
+
+void menu() {
+
+	std::cout << "\n============ Bag Array : Menu ============" << std::endl;
+	std::cout << "(1) Display Contents of Bag" << std::endl;
+	std::cout << "(2) Add Value" << std::endl;
+	std::cout << "(3) Remove Value" << std::endl;
+	std::cout << "(4) Sort The Bag" << std::endl;
+	std::cout << "(5) Iterative Search" << std::endl;
+	std::cout << "(6) Recursive Search" << std::endl;
+	std::cout << "(0) End Program" << std::endl;
+	std::cout << "Enter Option: ";
+
+} // end menu
+
+/******************************************************************************/
 /* Function:   endProgram
 /* Inputs:     N/A
 /* Outputs:    N/A
@@ -381,3 +406,4 @@ int endProgram() {
 
 	return 1;
 } // end endProgram
+
