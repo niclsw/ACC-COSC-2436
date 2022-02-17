@@ -74,7 +74,7 @@ template<class ItemType>
 bool ArrayBag<ItemType>::binarySearchRecursiveHelper(const ItemType& searchItem) {
 
    int minIndex = 0;
-   int maxIndex = itemCount - 1;
+   int maxIndex = itemCount;
    bool found = binarySearchRecursive(searchItem, minIndex, maxIndex);
 
    return found;
@@ -218,4 +218,3 @@ int ArrayBag<ItemType>::getIndexOf(const ItemType& target) const
    
    return result;
 }  // end getIndexOf
-
