@@ -21,9 +21,9 @@ public:
 	ArrayBag();
 	// Example of adding a new method
 	void bubbleSort();
-	bool binarySearchIterative(const ItemType& searchItem);
-	bool binarySearchRecursiveHelper(const ItemType& searchItem);
-	bool binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex);
+	bool binarySearchIterative(const ItemType& searchItem) const;
+	bool binarySearchRecursiveHelper(const ItemType& searchItem) const;
+	bool binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex) const;
 	int getCurrentSize() const;
 	bool isEmpty() const;
 	bool add(const ItemType& newEntry);

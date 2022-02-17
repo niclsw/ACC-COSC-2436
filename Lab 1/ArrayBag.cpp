@@ -34,8 +34,8 @@ void ArrayBag<ItemType>::bubbleSort()
 /******************************************************************************/
 
 template<class ItemType>
-bool ArrayBag<ItemType>::binarySearchIterative(const ItemType& searchItem)
-{
+bool ArrayBag<ItemType>::binarySearchIterative(const ItemType& searchItem) const {
+
    // Declare variables for use
    int minIndex = 0;
    int maxIndex = itemCount - 1;
@@ -71,7 +71,7 @@ bool ArrayBag<ItemType>::binarySearchIterative(const ItemType& searchItem)
 /******************************************************************************/
 
 template<class ItemType>
-bool ArrayBag<ItemType>::binarySearchRecursiveHelper(const ItemType& searchItem) {
+bool ArrayBag<ItemType>::binarySearchRecursiveHelper(const ItemType& searchItem) const {
 
    int minIndex = 0;
    int maxIndex = itemCount;
@@ -91,8 +91,8 @@ bool ArrayBag<ItemType>::binarySearchRecursiveHelper(const ItemType& searchItem)
 /******************************************************************************/
 
 template<class ItemType>
-bool ArrayBag<ItemType>::binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex)
-{
+bool ArrayBag<ItemType>::binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex) const {
+   
    bool found = false;
    if (minIndex == maxIndex) {
       return false;

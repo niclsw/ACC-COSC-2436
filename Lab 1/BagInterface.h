@@ -15,17 +15,17 @@ public:
 	// searches the bag using an interative method
 	// Input: searchItem the item the user is searching for
 	// Returns: boolean value true if found and false if not found
-	virtual bool binarySearchIterative(const ItemType& searchItem) = 0;
+	virtual bool binarySearchIterative(const ItemType& searchItem) const = 0;
 
 	// used as a helper to the recrusive search
 	// Input: searchItem the item the user is searching for
 	// Returns: boolean value true if found and false if not found
-	virtual bool binarySearchRecursiveHelper(const ItemType& searchItem) = 0;
+	virtual bool binarySearchRecursiveHelper(const ItemType& searchItem) const = 0;
 
 	// searches the bag using an recursive method
 	// Input: searchItem, indexminsize, indexmaxsize
 	// Returns: boolean value true if found and false if not found
-	virtual bool binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex) = 0;
+	virtual bool binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex) const = 0;
 	
 	// Gets the current number of entries in this bag.
 	// Returns the integer number of entries currently in the bag
