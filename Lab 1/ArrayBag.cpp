@@ -81,7 +81,7 @@ bool ArrayBag<ItemType>::binarySearchRecursiveHelper(const ItemType& searchItem)
 } // end binarySearchRecursiveHelper
 
 /******************************************************************************/
-/* Function:   binarySearchRecursive
+/* Function:   binarySearchRecursive PRIVATE
 /* Inputs:     reference string, int minIndex, int maxIndex
 /* Outputs:    Boolean value ( True / False)
 /*                     
