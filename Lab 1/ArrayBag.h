@@ -16,14 +16,19 @@ private:
 	// contains the given target or -1, if the array does not contain 
 	// the target.
 	int getIndexOf(const ItemType& target) const;   
+
+	// Private binary search recursive
 	bool binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex) const;
 
 public:
 	ArrayBag();
-	// Example of adding a new method
+
+	// New Methods
 	void bubbleSort();
 	bool binarySearchRecursiveHelper(const ItemType& searchItem) const;
 	bool binarySearchIterative(const ItemType& searchItem) const;
+
+	// Given Methods
 	int getCurrentSize() const;
 	bool isEmpty() const;
 	bool add(const ItemType& newEntry);

@@ -174,12 +174,12 @@ void addItems(ArrayBag<int>& bag) {
 						std::cout << "\nSuccess! " << newItem << " has been added to the bag." << std::endl;
 					}
 					else {
-						std::cout << "\nError - " << newItem << " not added. The bag is full..." << std::endl;
+						std::cout << "\nCould not add " << newItem << ". The bag is full." << std::endl;
 					}
 				}	
 				else { 
 					// Item is already in bag, display message of failure
-					std::cout << newItem << " this item is already in the bag..." << std::endl;
+					std::cout << "\nCould not add " << newItem << ". this item is already in the bag." << std::endl;
 				}
 			}
 			else {
@@ -228,15 +228,15 @@ void removeItems(ArrayBag<int>& bag) {
 
 					//Remove item and display message of success
 					bag.remove(stoi(removedItem));
-					std::cout << "Success! " << removedItem << " has been removed from the bag..." << std::endl;
+					std::cout << "\nSuccess! " << removedItem << " has been removed from the bag..." << std::endl;
 				}
 				else {
 					// removedItem is not in the bag, display error message
-					std::cout << "\nError - " << removedItem << " is not in the bag..." << std::endl;
+					std::cout << "\nCould not remove " << removedItem << ". This item is not in the bag." << std::endl;
 				}
 			}
 			else {
-				std::cout << "\nError - Item must be an integer..." << std::endl;
+				std::cout << "\nError - Item must be an integer." << std::endl;
 			}
 		}
 
