@@ -21,11 +21,13 @@ int main()
 	char input{};
 	ArrayBag<int> bag;
 	int items[] = {1, 33, 6, 9, 2, 65, 4, 29, 5, 8, 39, 88, 7, 25, 51, 3, 99, 14, 11, 10};
-		
+	
 	std::cout << "Adding positive integers to the bag: " << std::endl;
+
 	for (int i = 0; i < 20; i++) {
 		bag.add(items[i]);
 	}  // end for
+	
 
 	do {
 		// flush output buffer stream to keep the menu from taking in leftover input from user
