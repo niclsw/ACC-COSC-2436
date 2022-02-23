@@ -13,7 +13,7 @@ void binaryIterativeSearch(ArrayBag<int>& bag, bool isSorted);
 void binaryRecursiveSearch(ArrayBag<int>& bag, bool isSorted);
 bool isInt(const std::string& str);
 void menu();
-int endProgram();
+void endProgram();
 
 int main()
 {
@@ -299,10 +299,8 @@ void binaryIterativeSearch(ArrayBag<int>& bag, bool isSorted) {
 			if (searchItemStr != "MENU") { 
 				if (isInt(searchItemStr)) {
 
-					isFound = bag.binarySearchIterative(stoi(searchItemStr));
-
 					// get boolean value if item is found in bag
-					if (isFound) {
+					if (bag.binarySearchIterative(stoi(searchItemStr))) {
 						std::cout << "\nSuccess! We found " << searchItemStr << " in the bag." << std::endl;
 					}
 					else {
@@ -352,9 +350,7 @@ void binaryRecursiveSearch(ArrayBag<int>& bag, bool isSorted) {
 				if (isInt(searchItemStr)) { 
 
 					// get boolean value if item is found in bag
-					isFound = bag.binarySearchRecursiveHelper(stoi(searchItemStr)); 
-
-					if (isFound) {
+					if (bag.binarySearchRecursiveHelper(stoi(searchItemStr))) {
 						std::cout << "\nSuccess! We found " << searchItemStr << " in the bag." << std::endl;
 					}
 					else {
@@ -403,7 +399,7 @@ void menu() {
 // Purpose:    This function clears the screen and ends the program.	   
 ////////////////////////////////////////////////////////////////////////////////
 
-int endProgram() {
+void endProgram() {
 	// COMPLETE
 	// CASE 0 : End Program
 
@@ -411,6 +407,5 @@ int endProgram() {
 	std::cout << std::string(100, '\n'); 
 	std::cout << "\nProgram Ending..." << std::endl;
 
-	return 1;
 } // end endProgram
 
