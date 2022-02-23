@@ -3,6 +3,7 @@
 #include <vector>
 
 
+// Class node
 class Node {
     private:
         int item;
@@ -32,6 +33,8 @@ void Node::setItem(int anItem) { item = anItem; }
 void Node::setNext(Node* nextNodePtr) { next = nextNodePtr; }
 int Node::getItem() { return item;}
 Node* Node::getNext() { return next;}
+
+/////////////////////////////////////////////////////////////////
 
 const int QUIT = 4;
 
