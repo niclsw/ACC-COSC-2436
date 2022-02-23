@@ -3,14 +3,14 @@
 #include <cstddef>
 #include <vector>
 
-/******************************************************************************/
-/* Function:   bubbleSort
-/* Inputs:     N/A
-/* Outputs:    N/A
-/*                     
-/* Purpose:    This function sorts the item bag from lowest to highest number and
-/*             uses std::swap to switch the values.
-/******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
+// Function:   bubbleSort
+// Inputs:     N/A
+// Outputs:    N/A
+//                     
+// Purpose:    This function sorts the item bag from lowest to highest number and
+//             uses std::swap to switch the values.
+////////////////////////////////////////////////////////////////////////////////
 
 template<class ItemType>
 void ArrayBag<ItemType>::bubbleSort()
@@ -23,15 +23,15 @@ void ArrayBag<ItemType>::bubbleSort()
    }
 }  // end bubbleSort
 
-/******************************************************************************/
-/* Function:   binarySearchIterative
-/* Inputs:     reference string
-/* Outputs:    Boolean value ( True / False)
-/*                     
-/* Purpose:    This function uses an iterative approach to search the item bag 
-/*             for the searched item. It will return a true value if found and 
-/* 			   a false value if not found.
-/******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
+// Function:   binarySearchIterative
+// Inputs:     reference string
+// Outputs:    Boolean value ( True / False)
+//                     
+// Purpose:    This function uses an iterative approach to search the item bag 
+//             for the searched item. It will return a true value if found and 
+// 			   a false value if not found.
+////////////////////////////////////////////////////////////////////////////////
 
 template<class ItemType>
 bool ArrayBag<ItemType>::binarySearchIterative(const ItemType& searchItem) const {
@@ -60,15 +60,15 @@ bool ArrayBag<ItemType>::binarySearchIterative(const ItemType& searchItem) const
 	return false;
 }  // end binarySearchIterative
 
-/******************************************************************************/
-/* Function:   binarySearchRecursiveHelper
-/* Inputs:     reference string
-/* Outputs:    Boolean value ( True / False)
-/*                     
-/* Purpose:    This function is used as a helper to binarySearchRecursive. This
-/*             function determines the base indexs that will be used in the rec-
-/* 			   ursive version of a binary search. 
-/******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
+// Function:   binarySearchRecursiveHelper
+// Inputs:     reference string
+// Outputs:    Boolean value ( True / False)
+//                     
+// Purpose:    This function is used as a helper to binarySearchRecursive. This
+//             function determines the base indexs that will be used in the rec-
+// 			   ursive version of a binary search. 
+////////////////////////////////////////////////////////////////////////////////
 
 template<class ItemType>
 bool ArrayBag<ItemType>::binarySearchRecursiveHelper(const ItemType& searchItem) const {
@@ -80,15 +80,15 @@ bool ArrayBag<ItemType>::binarySearchRecursiveHelper(const ItemType& searchItem)
    return found;
 } // end binarySearchRecursiveHelper
 
-/******************************************************************************/
-/* Function:   binarySearchRecursive PRIVATE
-/* Inputs:     reference string, int minIndex, int maxIndex
-/* Outputs:    Boolean value ( True / False)
-/*                     
-/* Purpose:    This function searches the item bag recursively to find the item
-/*             the user is searching for. It returns a boolean value to the hel-
-/* 			   per function to tell the user if the item was found.
-/******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
+// Function:   binarySearchRecursive PRIVATE
+// Inputs:     reference string, int minIndex, int maxIndex
+// Outputs:    Boolean value ( True / False)
+//                     
+// Purpose:    This function searches the item bag recursively to find the item
+//             the user is searching for. It returns a boolean value to the hel-
+// 			   per function to tell the user if the item was found.
+////////////////////////////////////////////////////////////////////////////////
 
 template<class ItemType>
 bool ArrayBag<ItemType>::binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex) const {
