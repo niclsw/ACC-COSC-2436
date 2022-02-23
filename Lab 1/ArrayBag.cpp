@@ -93,7 +93,6 @@ bool ArrayBag<ItemType>::binarySearchRecursiveHelper(const ItemType& searchItem)
 template<class ItemType>
 bool ArrayBag<ItemType>::binarySearchRecursive(const ItemType& searchItem, ItemType minIndex, ItemType maxIndex) const {
    
-   bool found = false;
    if (minIndex == maxIndex) {
       return false;
    }
