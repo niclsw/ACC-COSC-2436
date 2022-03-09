@@ -27,7 +27,6 @@ int main()
 	for (int i = 0; i < 20; i++) {
 		bag.add(items[i]);
 	}  // end for
-	
 
 	do {
 		// flush output buffer stream to keep the menu from taking in leftover input from user
