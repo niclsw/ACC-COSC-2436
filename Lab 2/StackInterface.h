@@ -19,6 +19,8 @@ public:
 
 	// Returns the most recent item in the stack
 	virtual ItemType peek() const = 0;
+
+	virtual ~StackInterface() {}
 }; // end StackInterface
 
 #endif
