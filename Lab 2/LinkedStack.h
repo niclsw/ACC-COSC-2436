@@ -16,6 +16,7 @@ private:
 public:
 	LinkedStack();
 	LinkedStack(const LinkedStack<ItemType> &aStack);
+	LinkedStack<ItemType> &operator=(const LinkedStack<ItemType> &aStack);
 	virtual ~LinkedStack();
 	bool isEmpty() const;
 	bool push(const ItemType &newItem);

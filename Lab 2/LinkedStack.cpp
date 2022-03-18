@@ -32,6 +32,12 @@ LinkedStack<ItemType>::LinkedStack(const LinkedStack<ItemType> &aStack)
 } // end copy constructor
 
 template <class ItemType>
+LinkedStack<ItemType> &LinkedStack<ItemType>::operator=(const LinkedStack<ItemType> &aStack)
+{
+	return *this;
+} // end custom assignment operator
+
+template <class ItemType>
 LinkedStack<ItemType>::~LinkedStack()
 {
 	while (!isEmpty())
