@@ -32,6 +32,10 @@ int main()
         {
             std::cout << "\nError opening file. Try Again" << std::endl;
         }
+
+        // Clear input stream
+        std::cin.clear();
+        std::cin.ignore(100, '\n');
     } while (!auctionFile);
 
     // Grab first line and display item name
@@ -43,14 +47,8 @@ int main()
     {
         auctionFile >> bid;
 
-        // if stack is empty, push the first bid
-        if (theStack.isEmpty())
-        {
-            // push bid to stack
-            theStack.push(bid);
-        }
-        // if current item in stack is less than current bid, push the new top bid
-        else if (theStack.peek() < bid)
+        // if stack is empty or the LI in stack is less than bid, push bid
+        if (theStack.isEmpty() || theStack.peek() < bid)
         {
             // push bid to stack
             theStack.push(bid);
