@@ -12,7 +12,7 @@
 
 int main()
 {
-
+    // Initialize Files
     std::string fileName{""}, itemName{""};
     int bid{0};
     std::fstream auctionFile;
@@ -36,6 +36,7 @@ int main()
         // Clear input stream
         std::cin.clear();
         std::cin.ignore(100, '\n');
+        
     } while (!auctionFile);
 
     // Grab first line and display item name
