@@ -29,37 +29,63 @@ bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
     }
     else
     {
+        // while new entry is less than current node value, continue through the list until
+        // it finds a value in the list that is greater or less than the new entry
+        while (newEntry < headPtr->getItem() && headPtr->getNext() != nullptr)
+        {
 
-        // if an entry is less than the headPtr
-        if (newEntry < headPtr->getItem())
-        {
-            Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry, headPtr);
-            headPtr = newNodePtr;
-            success = true;
-            numItems++;
-        }
-        else
-        {
-            Node<ItemType> *curPtr = headPtr;
-            Node<ItemType> *prevPtr = nullptr;
-            while (curPtr != nullptr && newEntry > curPtr->getItem())
+            // if the getNext is not a null pointer continue on to next decision structure
+            if (headPtr->getNext() != nullptr)
             {
-                prevPtr = curPtr;
-                curPtr = curPtr->getNext();
-            }
-            if (curPtr == nullptr)
-            {
-                prevPtr->setNext(new Node<ItemType>(newEntry));
-                success = true;
+                // if getNext > newEntry, place newEntry before next node
+                if (headPtr->getItem() > newEntry)
+                {
+                    // create new node pointer inbetween previous node and next node
+                    Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry, headPtr->getNext());
+                    headPtr->setNext(newNodePtr);
+                    success = true;
+                    numItems++;
+                }
             }
             else
             {
-                Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry, curPtr);
-                prevPtr->setNext(newNodePtr);
+                // else set the next node to the new entry
+                headPtr->setNext(new Node<ItemType>(newEntry));
                 success = true;
+                numItems++;
             }
-            numItems++;
         }
+        // if an entry is less than the headPtr
+        // if (newEntry < headPtr->getItem())
+        // {
+
+        //     // Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry, headPtr);
+        //     // headPtr = newNodePtr;
+        //     // success = true;
+        //     // numItems++;
+        // }
+        // else
+        // {
+        // Node<ItemType> *curPtr = headPtr;
+        // Node<ItemType> *prevPtr = nullptr;
+        // while (curPtr != nullptr && newEntry > curPtr->getItem())
+        // {
+        //     prevPtr = curPtr;
+        //     curPtr = curPtr->getNext();
+        // }
+        // if (curPtr == nullptr)
+        // {
+        //     prevPtr->setNext(new Node<ItemType>(newEntry));
+        //     success = true;
+        // }
+        // else
+        // {
+        //     Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry, curPtr);
+        //     prevPtr->setNext(newNodePtr);
+        //     success = true;
+        // }
+        // numItems++;
+        // }
     }
 
     return success;
@@ -86,20 +112,26 @@ std::vector<ItemType> LinkedList<ItemType>::toVector()
     return listContents;
 }
 
+// destructor
+// goes through each node and deletes them
 template <class ItemType>
 LinkedList<ItemType>::~LinkedList()
 {
+    // create ptr to headPtr & create a temp ptr to the next node
     Node<ItemType> *currentPtr = headPtr;
     Node<ItemType> *nextPtr;
 
+    // while currentPtr does not equal nullptr
+    // goes through each node and deletes them
     while (currentPtr != nullptr)
     {
-
         nextPtr = currentPtr->getNext();
         delete currentPtr;
         currentPtr = nextPtr;
     }
 
+    // final cleanup
     headPtr = nullptr;
     numItems = 0;
-}
+
+} // end destructor
