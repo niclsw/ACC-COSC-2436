@@ -8,24 +8,24 @@ Node<ItemType>::Node() {
     next = nullptr;
 }
 
-// constructor which takes in a line value
+// constructor which takes in a Item value
 template <class ItemType>
-Node<ItemType>::Node(const ItemType &aLine) {
-    line = aLine;
+Node<ItemType>::Node(const ItemType &aItem) {
+    item = aItem;
     next = nullptr;
 }
 
-// constructor which takes in a line value and a pointer to the next node
+// constructor which takes in a Item value and a pointer to the next node
 template <class ItemType>
-Node<ItemType>::Node(const ItemType &aLine, Node<ItemType> *nextNodePtr) {
-    line = aLine;
+Node<ItemType>::Node(const ItemType &aItem, Node<ItemType> *nextNodePtr) {
+    item = aItem;
     next = nextNodePtr;
 }
 
-// setter for line value
+// setter for Item value
 template <class ItemType>
-void Node<ItemType>::setLine(const ItemType &aLine) {
-    line = aLine;
+void Node<ItemType>::setItem(const ItemType &aItem) {
+    item = aItem;
 }
 
 // setter for pointer to next node
@@ -34,10 +34,10 @@ void Node<ItemType>::setNext(Node<ItemType> *nextNodePtr) {
     next = nextNodePtr;
 }
 
-// getter for line value
+// getter for Item value
 template <class ItemType>
-ItemType Node<ItemType>::getLine() const {
-    return line;
+ItemType Node<ItemType>::getItem() const {
+    return item;
 }
 
 // getter for pointer to next node

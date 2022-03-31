@@ -20,27 +20,29 @@ LinkedList<ItemType>::LinkedList(ItemType *headPtr)
 template <class ItemType>
 bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
 {
-    bool success { false }
+    bool success{false};
     if (headPtr == nullptr)
     {
         headPtr = new Node<ItemType>(newEntry);
         success = true;
+        numItems++;
     }
     else
     {
 
         // if an entry is less than the headPtr
-        if (newEntry < headPtr->getLine())
+        if (newEntry < headPtr->getItem())
         {
             Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry, headPtr);
             headPtr = newNodePtr;
             success = true;
+            numItems++;
         }
         else
         {
             Node<ItemType> *curPtr = headPtr;
             Node<ItemType> *prevPtr = nullptr;
-            while (curPtr != nullptr && newEntry > curPtr->getLine())
+            while (curPtr != nullptr && newEntry > curPtr->getItem())
             {
                 prevPtr = curPtr;
                 curPtr = curPtr->getNext();
@@ -56,20 +58,8 @@ bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
                 prevPtr->setNext(newNodePtr);
                 success = true;
             }
+            numItems++;
         }
-
-
-
-
-        // Node<ItemType> *currentPtr = headPtr;
-        // while (currentPtr->getNext() != nullptr)
-        // {
-            
-        //     currentPtr = currentPtr->getNext();
-        // }
-        // currentPtr->setNext(new Node<ItemType>(newEntry));
-        // success = true;
-        // numItems++;
     }
 
     return success;
@@ -82,30 +72,34 @@ int LinkedList<ItemType>::getSize() const
 }
 
 template <class ItemType>
-ItemType LinkedList<ItemType>::toVector()
+std::vector<ItemType> LinkedList<ItemType>::toVector()
 {
-    ItemType vector;
-    Node<ItemType> *currentPtr = this->headPtr;
+    std::vector<ItemType> listContents;
+    Node<ItemType> *currentPtr = headPtr;
 
-    for (int i = 0; i < this->numItems; i++)
+    for (int i = 0; i < numItems; i++)
     {
-        vector.push_back(currentPtr->getItem());
+        listContents.push_back(currentPtr->getItem());
         currentPtr = currentPtr->getNext();
     }
 
-    return vector;
-} 
+    return listContents;
+}
 
 template <class ItemType>
 LinkedList<ItemType>::~LinkedList()
 {
-    Node<ItemType> *currentPtr = this->headPtr;
-    Node<ItemType> *tempPtr;
+    Node<ItemType> *currentPtr = headPtr;
+    Node<ItemType> *nextPtr;
 
     while (currentPtr != nullptr)
     {
-        tempPtr = currentPtr;
-        currentPtr = currentPtr->getNext();
-        delete tempPtr;
+
+        nextPtr = currentPtr->getNext();
+        delete currentPtr;
+        currentPtr = nextPtr;
     }
+
+    headPtr = nullptr;
+    numItems = 0;
 }

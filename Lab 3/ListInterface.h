@@ -13,10 +13,10 @@ public:
     // Gets the number of items in the list
     virtual int getSize() const = 0;
 
-    
-    virtual ItemType toVector()  = 0;
+    virtual std::vector<ItemType> toVector() = 0;
 
-    virtual ~LinkedList(){};
+    // destructor
+    virtual ~ListInterface() {}
 };
 
 #endif

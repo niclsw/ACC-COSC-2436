@@ -2,19 +2,19 @@
 #define _NODE
 
 template <class ItemType>
-class Node : public LinkedList
+class Node
 {
 private:
-    ItemType line;
+    ItemType item;
     Node<ItemType> *next;
 
 public:
     Node();
-    Node(const ItemType &aLine);
-    Node(const ItemType &aLine, Node<ItemType> *nextNodePtr);
-    void setLine(const ItemType &aLine);
+    Node(const ItemType &aItem);
+    Node(const ItemType &aItem, Node<ItemType> *nextNodePtr);
+    void setItem(const ItemType &aItem);
     void setNext(Node<ItemType> *nextNodePtr);
-    ItemType getLine() const;
+    ItemType getItem() const;
     Node<ItemType> *getNext() const;
 }; // end Node
 
