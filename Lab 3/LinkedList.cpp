@@ -29,28 +29,33 @@ bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
     }
     else
     {
+        Node<ItemType> *curPtr = headPtr;
+        Node<ItemType> *prevPtr = nullptr;
+
         // while new entry is less than current node value, continue through the list until
         // it finds a value in the list that is greater or less than the new entry
-        while (newEntry < headPtr->getItem() && headPtr->getNext() != nullptr)
+        // && curPtr->getNext() != nullptr
+        while (curPtr->getItem() > newEntry)
         {
 
-            // if the getNext is not a null pointer continue on to next decision structure
-            if (headPtr->getNext() != nullptr)
+            prevPtr = curPtr;
+            curPtr = curPtr->getNext();
+
+            // if getNext > newEntry, place newEntry before next node
+            if (curPtr->getItem() > newEntry)
             {
-                // if getNext > newEntry, place newEntry before next node
-                if (headPtr->getItem() > newEntry)
-                {
-                    // create new node pointer inbetween previous node and next node
-                    Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry, headPtr->getNext());
-                    headPtr->setNext(newNodePtr);
-                    success = true;
-                    numItems++;
-                }
+                // create new node pointer inbetween previous node and next node
+                Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry, curPtr->getNext());
+                prevPtr->setNext(newNodePtr);
+                success = true;
+                numItems++;
             }
-            else
+            // if getNext < newEntry, place newEntry after current node
+            else if (curPtr->getItem() < newEntry)
             {
-                // else set the next node to the new entry
-                headPtr->setNext(new Node<ItemType>(newEntry));
+                // create new node pointer inbetween previous node and next node
+                Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry, curPtr);
+                prevPtr->setNext(newNodePtr);
                 success = true;
                 numItems++;
             }
