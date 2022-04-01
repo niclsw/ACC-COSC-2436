@@ -30,10 +30,10 @@ int main()
         {
             std::string line;
             std::getline(file, line);
-            list.addNode(line);
+            bool passTest = list.addNode(line);
 
-            // test the file read
-            std::cout << line << std::endl;
+            // test the node pass
+            std::cout << passTest << std::endl;
             lineCount++;
         }
     }

@@ -42,19 +42,20 @@ bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
             curPtr = curPtr->getNext();
 
             // if getNext > newEntry, place newEntry before next node
-            if (curPtr->getItem() > newEntry)
+            if (prevPtr->getItem() > newEntry)
             {
                 // create new node pointer inbetween previous node and next node
+                                                                            // curPtr->getNext()
                 Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry, curPtr->getNext());
                 prevPtr->setNext(newNodePtr);
                 success = true;
                 numItems++;
             }
-            // if getNext < newEntry, place newEntry after current node
-            else if (curPtr->getItem() < newEntry)
+            // if getNext < newEntry, place newEntry inbetween next node
+            else if (prevPtr->getItem() < newEntry)
             {
                 // create new node pointer inbetween previous node and next node
-                Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry, curPtr);
+                Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry, prevPtr);
                 prevPtr->setNext(newNodePtr);
                 success = true;
                 numItems++;
