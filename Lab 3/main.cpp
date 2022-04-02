@@ -30,10 +30,10 @@ int main()
         {
             std::string line;
             std::getline(file, line);
-            bool passTest = list.addNode(line);
+            list.addNode(line);
 
             // test the node pass
-            std::cout << passTest << std::endl;
+            std::cout << line << std::endl;
             lineCount++;
         }
     }
@@ -42,9 +42,11 @@ int main()
         std::cout << "File failed to open" << std::endl;
     }
 
-    auto printOut = list.toVector();
+    // get list contents from toVector in list
+    std::vector<std::string> listContents = list.toVector();
 
-    for (auto i : printOut)
+    // print out list contents
+    for (auto i : listContents)
     {
         std::cout << i << std::endl;
     }
