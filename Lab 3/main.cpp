@@ -9,8 +9,7 @@ int main()
 {
     // Initialize variables and the LinkedList
     std::fstream file;
-    std::string fileName{""};
-    std::string line;
+    std::string fileName{""}, line{""};
     int lineCount{0};
     LinkedList<std::string> list;
 
@@ -47,9 +46,7 @@ int main()
 
     // print out list contents
     for (auto i : listContents)
-    {
         std::cout << i << std::endl;
-    }
 
     std::cout << "\nList Size: " << list.getSize() << std::endl;
     std::cout << "Line Count from File: " << lineCount << std::endl;

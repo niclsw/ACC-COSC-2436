@@ -1,4 +1,3 @@
-
 #ifndef _LINKED_LIST
 #define _LINKED_LIST
 
@@ -16,13 +15,11 @@ private:
     int numItems;            // Current number of entries in list
 
 public:
-    LinkedList();
-    LinkedList(const Node<ItemType> *headPtr);
-    virtual ~LinkedList();
-
-    bool addNode(const ItemType &newEntry);
-    int getSize() const;
-    std::vector<ItemType> toVector();
+    LinkedList();                           // default constructor
+    virtual ~LinkedList();                  // destructor
+    bool addNode(const ItemType &newEntry); // adds a node to the list
+    int getSize() const;                    // returns the number of items in the list
+    std::vector<ItemType> toVector();       // converts the list to a vector
 };
 
 #include "LinkedList.cpp"
