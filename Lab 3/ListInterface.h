@@ -6,13 +6,19 @@ template <class ItemType>
 class ListInterface
 {
 public:
-    // returns a boolean value true if the list is empty
-    // otherwise it will return false
+    // adds an item to the list. will return true if successful, false otherwise
+    // INPUT  : Reference to newEntry
+    // OUTPUT : True if successful, false otherwise
     virtual bool addNode(const ItemType &newEntry) = 0;
 
-    // Gets the number of items in the list
+    // accessor for the number of items in the list
+    // INPUT  : None
+    // OUTPUT : Number of items in the list
     virtual int getSize() const = 0;
 
+    // converts the list to a vector and returns as a vector
+    // INPUT  : None
+    // OUTPUT : Vector of list contents
     virtual std::vector<ItemType> toVector() = 0;
 
     // destructor
