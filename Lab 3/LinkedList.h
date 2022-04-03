@@ -2,7 +2,6 @@
 #ifndef _LINKED_LIST
 #define _LINKED_LIST
 
-
 #include <vector>
 #include <string>
 
@@ -18,14 +17,12 @@ private:
 
 public:
     LinkedList();
-    LinkedList(ItemType *headPtr);
+    LinkedList(const Node<ItemType> *headPtr);
     virtual ~LinkedList();
 
-    
     bool addNode(const ItemType &newEntry);
     int getSize() const;
     std::vector<ItemType> toVector();
-    
 };
 
 #include "LinkedList.cpp"

@@ -11,7 +11,7 @@ LinkedList<ItemType>::LinkedList()
 }
 
 template <class ItemType>
-LinkedList<ItemType>::LinkedList(ItemType *headPtr)
+LinkedList<ItemType>::LinkedList(const Node<ItemType> *headPtr)
 {
     headPtr = headPtr;
     numItems = 0;
