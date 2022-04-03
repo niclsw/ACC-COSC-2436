@@ -10,6 +10,7 @@ int main()
     // Initialize variables and the LinkedList
     std::fstream file;
     std::string fileName{""};
+    std::string line;
     int lineCount{0};
     LinkedList<std::string> list;
 
@@ -28,12 +29,11 @@ int main()
         // read file into LinkedList
         while (!file.eof())
         {
-            std::string line;
+            // getline from file and send to list object using addNode method
             std::getline(file, line);
             list.addNode(line);
 
-            // test the node pass
-            std::cout << line << std::endl;
+            // increment line count
             lineCount++;
         }
     }
@@ -52,7 +52,7 @@ int main()
     }
 
     std::cout << "\nList Size: " << list.getSize() << std::endl;
-    std::cout << "Line Count: " << lineCount << std::endl;
+    std::cout << "Line Count from File: " << lineCount << std::endl;
 
     // close file
     file.close();

@@ -5,7 +5,8 @@
 // default constructor
 template <class ItemType>
 Node<ItemType>::Node() {
-    next = nullptr;
+    item{""}
+    next{nullptr};
 }
 
 // constructor which takes in a Item value

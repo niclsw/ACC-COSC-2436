@@ -20,26 +20,34 @@ LinkedList<ItemType>::LinkedList(ItemType *headPtr)
 template <class ItemType>
 bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
 {
+    // bool value to return and bool for if newEntry is duplicate
     bool success{false}, duplicate{false};
 
-    // if Node headptr is nullptr, create new Node
+    // if Node headptr is nullptr, create new Node and add it to end of linkedLi
     if (headPtr == nullptr)
     {
         headPtr = new Node<ItemType>(newEntry);
         success = true;
     }
-    // if Node headptr is not nullptr, place new node in ascending order on list
+    // if Node headptr is not nullptr, determine where to put it in node
     else
     {
+        // create newNodePtr and set it to new entry
+        // create previousNodePtr for temp storage
+        // create currentNodePtr to traverse linked list
         Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry);
         Node<ItemType> *previousNodePtr = nullptr;
         Node<ItemType> *currentNodePtr = headPtr;
 
         // loop through list until new node is placed in correct position
+        // >= to determine if currentNode-getItem() is greater or equal to newEntry
         while (currentNodePtr != nullptr && newEntry >= currentNodePtr->getItem())
         {
+            // assign previous to currentNodePtr
+            // currentNodePtr is assigned the next node in linked list
             previousNodePtr = currentNodePtr;
             currentNodePtr = currentNodePtr->getNext();
+
             // if new node item is equal to item in previous node, set duplicate to true
             if (newEntry == previousNodePtr->getItem())
             {
@@ -54,22 +62,26 @@ bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
         // if not duplicate, continue through decision structure
         if (!duplicate)
         {
+            // if previous ptr is nullptr, new node ptr next is set to headPtr
             if (previousNodePtr == nullptr)
             {
                 newNodePtr->setNext(headPtr);
                 headPtr = newNodePtr;
             }
-            // if new node is last in list, set new node at end of list
+            // if currentNodePtr is last in list with a nullptr, set new node at end of list
             else if (currentNodePtr == nullptr)
             {
                 previousNodePtr->setNext(newNodePtr);
             }
-            // if new node is in middle of list, set new node as middle
+            // if not last in list, set newNodePtr inbetween current and previous ptrs
+            // already determined newEntry is not greater than currentNodePtr
             else
             {
                 previousNodePtr->setNext(newNodePtr);
                 newNodePtr->setNext(currentNodePtr);
             }
+
+            // set success to true
             success = true;
         }
     }
