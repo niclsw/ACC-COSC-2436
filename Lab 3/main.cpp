@@ -23,7 +23,6 @@ int main()
     // if file is openable pull contents into LinkedList
     if (file)
     {
-        std::cout << "File opened successfully" << std::endl;
 
         // read file into LinkedList
         while (!file.eof())
@@ -35,6 +34,8 @@ int main()
             // increment line count
             lineCount++;
         }
+
+        std::cout << "\nFile opened successfully and read " << lineCount << " lines from " << fileName << std::endl;
     }
     else
     {
