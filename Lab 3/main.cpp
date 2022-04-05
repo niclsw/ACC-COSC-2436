@@ -19,7 +19,7 @@ int main()
     // Initialize LinkedList object
     LinkedList<std::string> list;
 
-    // create file object and get contents from getFile()
+    // Initialize file object and get contents from getFile()
     std::fstream file = getFile(fileName);
 
     // if file is openable pull contents into LinkedList
