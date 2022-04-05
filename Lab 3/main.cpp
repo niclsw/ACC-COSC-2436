@@ -5,6 +5,7 @@
 
 #include "LinkedList.h"
 
+// Prototypes
 std::fstream getFile(std::string &fileName);
 void readToList(LinkedList<std::string> &list, std::fstream &file, int &lineCount);
 void displayList(LinkedList<std::string> &list);
@@ -85,7 +86,7 @@ void readToList(LinkedList<std::string> &list, std::fstream &file, int &lineCoun
     // while there is a line in the file, add it to the list
     while (std::getline(file, line))
     {
-        // increment line count
+        // increment file line count
         lineCount++;
 
         // add line to list

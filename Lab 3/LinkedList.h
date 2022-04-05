@@ -15,14 +15,12 @@ private:
     int numItems;            // Current number of entries in list
 
 public:
-    LinkedList();
-    LinkedList(const ItemType *headPtr);
-    virtual ~LinkedList();
-
-    
-    bool addNode(const ItemType &newEntry);
-    int getSize() const;
-    std::vector<ItemType> toVector();
+    LinkedList();                                // Default constructor
+    LinkedList(const ItemType *headPtr);        // Constructor with a head pointer
+    virtual ~LinkedList();                      // Destructor
+    bool addNode(const ItemType &newEntry);    // Adds a node to the list
+    int getSize() const;                      // Returns the size of the list
+    std::vector<ItemType> toVector();         // Returns the list as a vector
     
 };
 
