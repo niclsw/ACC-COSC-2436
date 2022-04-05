@@ -8,14 +8,7 @@ LinkedList<ItemType>::LinkedList()
 {
     headPtr = nullptr;
     numItems = 0;
-}
-
-template <class ItemType>
-LinkedList<ItemType>::LinkedList(const ItemType *headPtr)
-{
-    headPtr = headPtr;
-    numItems = 0;
-}
+} // end default constructor
 
 template <class ItemType>
 bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
@@ -32,10 +25,8 @@ bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
     // if Node headptr is not nullptr, determine where to put it in node
     else
     {
-        // create newNodePtr and set it to new entry
         // create previousNodePtr for temp storage
         // create currentNodePtr to traverse linked list
-        Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry);
         Node<ItemType> *previousNodePtr = nullptr;
         Node<ItemType> *currentNodePtr = headPtr;
 
@@ -62,6 +53,9 @@ bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
         // if not duplicate, continue through decision structure
         if (!duplicate)
         {
+            // Now we need to set memory asside for new node
+            Node<ItemType> *newNodePtr = new Node<ItemType>(newEntry);
+
             // if previous ptr is nullptr, new node ptr next is set to headPtr
             if (previousNodePtr == nullptr)
             {

@@ -1,7 +1,5 @@
-
 #ifndef _LINKED_LIST
 #define _LINKED_LIST
-
 
 #include <vector>
 #include <string>

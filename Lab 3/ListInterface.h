@@ -21,7 +21,7 @@ public:
     // OUTPUT : Vector of list contents
     virtual std::vector<ItemType> toVector() = 0;
 
-    // destructor
+    // destructor for the list interface
     virtual ~ListInterface() {}
 };
 

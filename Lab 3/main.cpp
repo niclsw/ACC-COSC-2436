@@ -67,6 +67,7 @@ std::fstream getFile(std::string &fileName)
         {
             throw std::invalid_argument("File failed to open");
         }
+
     }
     catch (std::invalid_argument e)
     {
