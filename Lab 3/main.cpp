@@ -63,21 +63,11 @@ std::fstream getFile(std::string &fileName)
     // Error check the file open. If it fails, print an error message.
     try
     {
-<<<<<<< HEAD
         if (!file)
-=======
-
-        // read file into LinkedList
-        while (!file.eof())
->>>>>>> 96d309eb4d6832b6c66fba8ff5d848e3bf14a481
         {
             throw std::invalid_argument("File failed to open");
         }
 
-<<<<<<< HEAD
-=======
-        std::cout << "\nFile opened successfully and read " << lineCount << " lines from " << fileName << std::endl;
->>>>>>> 96d309eb4d6832b6c66fba8ff5d848e3bf14a481
     }
     catch (std::invalid_argument e)
     {
