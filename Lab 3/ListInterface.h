@@ -19,7 +19,7 @@ public:
     // converts the list to a vector and returns as a vector
     // INPUT  : None
     // OUTPUT : Vector of list contents
-    virtual std::vector<ItemType> toVector() = 0;
+    virtual std::vector<ItemType> toVector() const = 0;
 
     // destructor for the list interface
     virtual ~ListInterface() {}

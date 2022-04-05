@@ -8,7 +8,7 @@
 // Prototypes
 std::fstream getFile(std::string &fileName);
 void readToList(LinkedList<std::string> &list, std::fstream &file, int &lineCount);
-void displayList(LinkedList<std::string> &list);
+void displayList(const LinkedList<std::string> &list);
 
 int main()
 {
@@ -35,13 +35,12 @@ int main()
         // Display final line counts
         std::cout << "\nList Size: " << list.getSize() << std::endl;
         std::cout << "Line Count from File: " << lineCount << std::endl;
-
     }
     else
     {
         std::cout << "Error - Program Ending..." << std::endl;
     }
-    
+
     // cleanup
     file.close();
     return 0;
@@ -65,10 +64,7 @@ std::fstream getFile(std::string &fileName)
     try
     {
         if (!file)
-        {
             throw std::invalid_argument("File failed to open");
-        }
-
     }
     catch (std::invalid_argument e)
     {
@@ -94,7 +90,7 @@ void readToList(LinkedList<std::string> &list, std::fstream &file, int &lineCoun
     }
 } // end readToList
 
-void displayList(LinkedList<std::string> &list)
+void displayList(const LinkedList<std::string> &list)
 {
     // get list contents from toVector in list
     std::vector<std::string> listContents = list.toVector();

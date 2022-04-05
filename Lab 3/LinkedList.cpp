@@ -93,7 +93,7 @@ int LinkedList<ItemType>::getSize() const
 }
 
 template <class ItemType>
-std::vector<ItemType> LinkedList<ItemType>::toVector()
+std::vector<ItemType> LinkedList<ItemType>::toVector() const
 {
     std::vector<ItemType> listContents;
     Node<ItemType> *currentPtr = headPtr;

@@ -20,7 +20,7 @@ public:
     virtual ~LinkedList();                      // Destructor
     bool addNode(const ItemType &newEntry);    // Adds a node to the list
     int getSize() const;                      // Returns the size of the list
-    std::vector<ItemType> toVector();         // Returns the list as a vector
+    std::vector<ItemType> toVector() const;         // Returns the list as a vector
     
 };
 
