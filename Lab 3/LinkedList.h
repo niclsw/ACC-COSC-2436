@@ -18,7 +18,7 @@ private:
 
 public:
     LinkedList();
-    LinkedList(ItemType *headPtr);
+    LinkedList(const ItemType *headPtr);
     virtual ~LinkedList();
 
     

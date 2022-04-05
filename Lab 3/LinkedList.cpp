@@ -11,7 +11,7 @@ LinkedList<ItemType>::LinkedList()
 }
 
 template <class ItemType>
-LinkedList<ItemType>::LinkedList(ItemType *headPtr)
+LinkedList<ItemType>::LinkedList(const ItemType *headPtr)
 {
     headPtr = headPtr;
     numItems = 0;
@@ -23,7 +23,7 @@ bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
     // bool value to return and bool for if newEntry is duplicate
     bool success{false}, duplicate{false};
 
-    // if Node headptr is nullptr, create new Node and add it to end of linkedLi
+    // if Node headptr is nullptr, create new Node and add it to end of list
     if (headPtr == nullptr)
     {
         headPtr = new Node<ItemType>(newEntry);
