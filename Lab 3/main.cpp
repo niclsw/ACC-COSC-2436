@@ -115,6 +115,15 @@ void readToList(LinkedList<std::string> &list, std::fstream &file, int &lineCoun
     }
 } // end readToList
 
+////////////////////////////////////////////////////////////////////////////////
+// Name:       displayList
+// Inputs:     const LinkedList<std::string> &list
+// Outputs:    None
+// Purpose:    Accepts a linked list object and prints the contents of the list 
+//             using toVector function in the linked list object. Will then print
+//             the list to the console.
+////////////////////////////////////////////////////////////////////////////////
+
 void displayList(const LinkedList<std::string> &list)
 {
     // get list contents from toVector in list
