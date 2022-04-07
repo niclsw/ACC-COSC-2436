@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////////////////////
+// Nicklaus Walker
+// Lab 3 - COSC-2436-003
+// This program will accept a file name from the user and error check
+// the file open. It will then read the file and add each line (minus
+// the duplicates) to a linked list. It will then print the linked list
+////////////////////////////////////////////////////////////////////////////////
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -47,6 +55,14 @@ int main()
 
 } // end main
 
+////////////////////////////////////////////////////////////////////////////////
+// Name:       getFile
+// Inputs:     std::string &fileName
+// Outputs:    std::fstream
+// Purpose:    Used to get file name from user and error check file open. The file
+//             is then returned to the calling function.
+////////////////////////////////////////////////////////////////////////////////
+
 std::fstream getFile(std::string &fileName)
 {
 
@@ -73,6 +89,15 @@ std::fstream getFile(std::string &fileName)
 
     return file;
 } // end getFile
+
+////////////////////////////////////////////////////////////////////////////////
+// Name:       readToList
+// Inputs:     LinkedList<std::string> &list, std::fstream &file, int &lineCount
+// Outputs:    None
+// Purpose:    Accepts linked list object, file object, and line count variable and
+//             reads the file line by line while sending each line to the addNode
+//             function in the linked list object and increments the line count.
+////////////////////////////////////////////////////////////////////////////////
 
 void readToList(LinkedList<std::string> &list, std::fstream &file, int &lineCount)
 {
