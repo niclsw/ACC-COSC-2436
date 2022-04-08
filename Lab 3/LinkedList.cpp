@@ -4,10 +4,8 @@
 #include "LinkedList.h"
 
 template <class ItemType>
-LinkedList<ItemType>::LinkedList()
+LinkedList<ItemType>::LinkedList() : headPtr(nullptr), numItems(0)
 {
-    headPtr = nullptr;
-    numItems = 0;
 } // end default constructor
 
 template <class ItemType>
