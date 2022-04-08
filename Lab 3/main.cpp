@@ -82,7 +82,7 @@ std::fstream getFile(std::string &fileName)
         if (!file)
             throw std::invalid_argument("File failed to open");
     }
-    catch (std::invalid_argument e)
+    catch (std::invalid_argument &e)
     {
         std::cout << e.what() << std::endl;
     }
@@ -119,7 +119,7 @@ void readToList(LinkedList<std::string> &list, std::fstream &file, int &lineCoun
 // Name:       displayList
 // Inputs:     const LinkedList<std::string> &list
 // Outputs:    None
-// Purpose:    Accepts a linked list object and prints the contents of the list 
+// Purpose:    Accepts a linked list object and prints the contents of the list
 //             using toVector function in the linked list object. Will then print
 //             the list to the console.
 ////////////////////////////////////////////////////////////////////////////////
