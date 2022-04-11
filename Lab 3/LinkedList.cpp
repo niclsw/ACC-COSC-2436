@@ -38,7 +38,7 @@ bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
             currentNodePtr = currentNodePtr->getNext();
 
             // if new node item is equal to item in previous node, set duplicate to true
-            (newEntry == currentNodePtr->getItem()) ? duplicate = true : duplicate = false;
+            duplicate = (newEntry == previousNodePtr->getItem() ? true : false);
         }
 
         // if not duplicate, continue through decision structure
