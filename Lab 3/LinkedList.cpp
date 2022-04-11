@@ -8,6 +8,13 @@ LinkedList<ItemType>::LinkedList() : headPtr(nullptr), numItems(0)
 {
 } // end default constructor
 
+////////////////////////////////////////////////////////////////////////////////
+// Name:       addNode
+// Inputs:     const ItemType &newEntry
+// Outputs:    bool
+// Purpose:    Adds a node to the list in ascending order, not including duplicates.
+////////////////////////////////////////////////////////////////////////////////
+
 template <class ItemType>
 bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
 {
@@ -77,11 +84,25 @@ bool LinkedList<ItemType>::addNode(const ItemType &newEntry)
     return success;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// Name:       getSize
+// Inputs:     None
+// Outputs:    int
+// Purpose:    Accessor for the number of items in the list
+////////////////////////////////////////////////////////////////////////////////
+
 template <class ItemType>
 int LinkedList<ItemType>::getSize() const
 {
     return numItems;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// Name:       toVector
+// Inputs:     None
+// Outputs:    std::vector<ItemType>
+// Purpose:    Converts the list to a vector and returns as a vector
+////////////////////////////////////////////////////////////////////////////////
 
 template <class ItemType>
 std::vector<ItemType> LinkedList<ItemType>::toVector() const
@@ -98,8 +119,13 @@ std::vector<ItemType> LinkedList<ItemType>::toVector() const
     return listContents;
 }
 
-// destructor
-// goes through each node and deletes them
+////////////////////////////////////////////////////////////////////////////////
+// Name:       ~LinkedList
+// Inputs:     None
+// Outputs:    None
+// Purpose:    Destructor for the LinkedList class
+////////////////////////////////////////////////////////////////////////////////
+
 template <class ItemType>
 LinkedList<ItemType>::~LinkedList()
 {
