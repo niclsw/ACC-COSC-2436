@@ -16,8 +16,6 @@ protected:
     // Protected Utility Methods Section:
     // Recursive helper methods for the public methods.
     //------------------------------------------------------------
-    int getHeightHelper(std::shared_ptr<BinaryNode<ItemType>> subTreePtr) const;
-    int getNumberOfNodesHelper(std::shared_ptr<BinaryNode<ItemType>> subTreePtr) const;
     auto getEntryHelper(std::shared_ptr<BinaryNode<ItemType>> subTreePtr, const ItemType &target) const;
 
     // Recursively adds a new node to the tree in a left/right fashion to keep tree balanced.
@@ -35,16 +33,8 @@ protected:
     auto findNode(std::shared_ptr<BinaryNode<ItemType>> treePtr,
                   const ItemType &target, bool &isSuccessful) const;
 
-    // Copies the tree rooted at treePtr and returns a pointer to the root of the copy.
-    auto copyTree(const std::shared_ptr<BinaryNode<ItemType>> oldTreeRootPtr) const;
-
     // Recursively deletes all nodes from the tree.
-    void destroyTree(std::shared_ptr<BinaryNode<ItemType>> subTreePtr);
-
-    // Recursive traversal helper methods:
-    void preorder(void visit(ItemType &), std::shared_ptr<BinaryNode<ItemType>> treePtr) const;
-    void inorder(void visit(ItemType &), std::shared_ptr<BinaryNode<ItemType>> treePtr) const;
-    void postorder(void visit(ItemType &), std::shared_ptr<BinaryNode<ItemType>> treePtr) const;
+    //void destroyTree(std::shared_ptr<BinaryNode<ItemType>> subTreePtr);
 
 public:
     //------------------------------------------------------------
@@ -60,31 +50,11 @@ public:
     //------------------------------------------------------------
     // Public BinaryTreeInterface Methods Section.
     //------------------------------------------------------------
-    bool isEmpty() const;
-    int getHeight() const;
-    int getNumberOfNodes() const;
-
-    ItemType getRootData() const;
-    void setRootData(const ItemType &newData);
 
     bool add(const ItemType &newData); // Adds an item to the tree
     bool remove(const ItemType &data); // Removes specified item from the tree
-    void clear();
 
     ItemType getEntry(const ItemType &anEntry) const;
-    bool contains(const ItemType &anEntry) const;
-
-    //------------------------------------------------------------
-    // Public Traversals Section.
-    //------------------------------------------------------------
-    void preorderTraverse(void visit(ItemType &)) const;
-    void inorderTraverse(void visit(ItemType &)) const;
-    void postorderTraverse(void visit(ItemType &)) const;
-
-    //------------------------------------------------------------
-    // Overloaded Operator Section.
-    //------------------------------------------------------------
-    BinaryNodeTree &operator=(const BinaryNodeTree &rightHandSide);
 }; // end BinaryNodeTree
 
 #include "BinaryNodeTree.cpp"
