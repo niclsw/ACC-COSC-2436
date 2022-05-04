@@ -18,22 +18,22 @@ protected:
     //------------------------------------------------------------
     int getHeightHelper(std::shared_ptr<BinaryNode<ItemType>> subTreePtr) const;
     int getNumberOfNodesHelper(std::shared_ptr<BinaryNode<ItemType>> subTreePtr) const;
+    auto getEntryHelper(std::shared_ptr<BinaryNode<ItemType>> subTreePtr, const ItemType &target) const;
 
     // Recursively adds a new node to the tree in a left/right fashion to keep tree balanced.
     auto balancedAdd(std::shared_ptr<BinaryNode<ItemType>> subTreePtr,
                      std::shared_ptr<BinaryNode<ItemType>> newNodePtr);
 
     // Removes the target value from the tree.
-    virtual auto removeValue(std::shared_ptr<BinaryNode<ItemType>> subTreePtr,
-                             const ItemType target, bool &isSuccessful);
+    auto removeValue(std::shared_ptr<BinaryNode<ItemType>> subTreePtr, const ItemType &target, bool &success);
 
     // Copies values up the tree to overwrite value in current node until
     // a leaf is reached; the leaf is then removed, since its value is stored in the parent.
     auto moveValuesUpTree(std::shared_ptr<BinaryNode<ItemType>> subTreePtr);
 
     // Recursively searches for target value.
-    virtual auto findNode(std::shared_ptr<BinaryNode<ItemType>> treePtr,
-                          const ItemType &target, bool &isSuccessful) const;
+    auto findNode(std::shared_ptr<BinaryNode<ItemType>> treePtr,
+                  const ItemType &target, bool &isSuccessful) const;
 
     // Copies the tree rooted at treePtr and returns a pointer to the root of the copy.
     auto copyTree(const std::shared_ptr<BinaryNode<ItemType>> oldTreeRootPtr) const;
