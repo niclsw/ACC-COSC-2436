@@ -64,14 +64,14 @@ public:
     int getHeight() const;
     int getNumberOfNodes() const;
 
-    ItemType getRootData() const throw(PrecondViolatedExcept);
+    ItemType getRootData() const;
     void setRootData(const ItemType &newData);
 
     bool add(const ItemType &newData); // Adds an item to the tree
     bool remove(const ItemType &data); // Removes specified item from the tree
     void clear();
 
-    ItemType getEntry(const ItemType &anEntry) const throw(NotFoundException);
+    ItemType getEntry(const ItemType &anEntry) const;
     bool contains(const ItemType &anEntry) const;
 
     //------------------------------------------------------------
