@@ -1,6 +1,6 @@
 #include "BinaryNode.h"
 
-template<class ItemType>
+template <class ItemType>
 BinaryNode<ItemType>::BinaryNode() : leftPtr(nullptr), rightPtr(nullptr)
 {
 } // end default constructor
@@ -15,44 +15,38 @@ BinaryNode<ItemType>::BinaryNode(const int &aID, const std::string &aName, const
 {
 } // end constructor
 
-template<class ItemType>
+template <class ItemType>
 void BinaryNode<ItemType>::setLeftPtr(const std::shared_ptr<BinaryNode<ItemType>> leftPtr)
 {
     this->leftPtr = leftPtr;
 } // end setLeftPtr
 
-template<class ItemType>
+template <class ItemType>
 void BinaryNode<ItemType>::setRightPtr(const std::shared_ptr<BinaryNode<ItemType>> rightPtr)
 {
     this->rightPtr = rightPtr;
 } // end setRightPtr
 
-template<class ItemType>
-ItemType BinaryNode<ItemType>::getName() const
-{
-    return name;
-} // end getItem
-
-template<class ItemType>
+template <class ItemType>
 std::shared_ptr<BinaryNode<ItemType>> BinaryNode<ItemType>::getLeftPtr() const
 {
     return leftPtr;
 } // end getLeftPtr
 
-template<class ItemType>
+template <class ItemType>
 std::shared_ptr<BinaryNode<ItemType>> BinaryNode<ItemType>::getRightPtr() const
 {
     return rightPtr;
 } // end getRightPtr
 
-template<class ItemType>
-void BinaryNode<ItemType>::setID(const ItemType &ID)
+template <class ItemType>
+int BinaryNode<ItemType>::getID() const
 {
-    item = ID;
-} // end setID
-
-template<class ItemType>
-ItemType BinaryNode<ItemType>::getID() const
-{
-    return item;
+    return ID;
 } // end getID
+
+template <class ItemType>
+std::string BinaryNode<ItemType>::getName() const
+{
+    return name;
+} // end getItem
