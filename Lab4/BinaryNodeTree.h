@@ -1,61 +1,50 @@
-#ifndef BINARY_NODE_TREE_
-#define BINARY_NODE_TREE_
+#ifndef BINARY_NODE_TREE_H
+#define BINARY_NODE_TREE_H
 
-#include "BinaryTreeInterface.h"
-#include "BinaryNode.h"
 #include <memory>
 
-template <class ItemType>
-class BinaryNodeTree : public BinaryTreeInterface<ItemType>
+#include "EmployeeInfo.h"
+
+class BinaryNodeTree
 {
 private:
-    std::shared_ptr<BinaryNode<ItemType>> rootPtr;
+    // smart pointer to EmployeeInfo root
+    std::shared_ptr<EmployeeInfo> root;
 
-protected:
-    //------------------------------------------------------------
-    // Protected Utility Methods Section:
-    // Recursive helper methods for the public methods.
-    //------------------------------------------------------------
-    auto getEntryHelper(std::shared_ptr<BinaryNode<ItemType>> subTreePtr, const ItemType &target) const;
+    // helper function to insert a new EmployeeInfo into the tree
+    void insertHelper(std::shared_ptr<EmployeeInfo> node, std::shared_ptr<EmployeeInfo> newNode);
 
-    // Recursively adds a new node to the tree in a left/right fashion to keep tree balanced.
-    auto balancedAdd(std::shared_ptr<BinaryNode<ItemType>> subTreePtr,
-                     std::shared_ptr<BinaryNode<ItemType>> newNodePtr);
+    // helper function to remove an EmployeeInfo from the tree
+    bool removeHelper(std::shared_ptr<EmployeeInfo> node, int id);
 
-    // Removes the target value from the tree.
-    auto removeValue(std::shared_ptr<BinaryNode<ItemType>> subTreePtr, const ItemType &target, bool &success);
+    // helper function to find an EmployeeInfo in the tree
+    std::shared_ptr<EmployeeInfo> findHelper(std::shared_ptr<EmployeeInfo> node, int id);
 
-    // Copies values up the tree to overwrite value in current node until
-    // a leaf is reached; the leaf is then removed, since its value is stored in the parent.
-    auto moveValuesUpTree(std::shared_ptr<BinaryNode<ItemType>> subTreePtr);
-
-    // Recursively searches for target value.
-    auto findNode(std::shared_ptr<BinaryNode<ItemType>> treePtr,
-                  const ItemType &target, bool &isSuccessful) const;
-
-    // Recursively deletes all nodes from the tree.
-    //void destroyTree(std::shared_ptr<BinaryNode<ItemType>> subTreePtr);
+    // helper function to print the tree
+    void printHelper(std::shared_ptr<EmployeeInfo> node);
 
 public:
-    //------------------------------------------------------------
-    // Constructor and Destructor Section.
-    //------------------------------------------------------------
+    // constructor
     BinaryNodeTree();
-    BinaryNodeTree(const ItemType &rootItem);
-    BinaryNodeTree(const ItemType &rootItem,
-                   const std::shared_ptr<BinaryNodeTree<ItemType>> leftTreePtr,
-                   const std::shared_ptr<BinaryNodeTree<ItemType>> rightTreePtr);
-    virtual ~BinaryNodeTree();
+    BinaryNodeTree(std::shared_ptr<EmployeeInfo> root);
+    BinaryNodeTree(std::shared_ptr<EmployeeInfo> root, std::shared_ptr<EmployeeInfo> left, std::shared_ptr<EmployeeInfo> right);
 
-    //------------------------------------------------------------
-    // Public BinaryTreeInterface Methods Section.
-    //------------------------------------------------------------
+    // destructor
+    ~BinaryNodeTree() {}
 
-    bool add(const ItemType &newData); // Adds an item to the tree
-    bool remove(const ItemType &data); // Removes specified item from the tree
+    // methods to insert a new EmployeeInfo into the tree
+    void insert(std::string &name, int &id);
 
-    ItemType getEntry(const ItemType &anEntry) const;
-}; // end BinaryNodeTree
+    // methods to remove an EmployeeInfo from the tree
+    bool remove(int id);
+
+    // methods to find an EmployeeInfo in the tree
+    std::shared_ptr<EmployeeInfo> find(int id);
+
+    // methods to print the tree
+    void print();
+};
 
 #include "BinaryNodeTree.cpp"
+
 #endif

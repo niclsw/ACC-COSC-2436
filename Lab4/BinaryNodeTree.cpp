@@ -1,152 +1,102 @@
-#include <memory>
 #include "BinaryNodeTree.h"
+#include "iostream"
 
-template <class ItemType>
-BinaryNodeTree<ItemType>::BinaryNodeTree() : rootPtr(nullptr)
-{
-} // end default constructor
+BinaryNodeTree::BinaryNodeTree() : root(nullptr) {}
 
-template <class ItemType>
-BinaryNodeTree<ItemType>::BinaryNodeTree(const ItemType &rootItem) : rootPtr(std::make_shared<BinaryNode<ItemType>>(rootItem))
-{
-} // end constructor
+BinaryNodeTree::BinaryNodeTree(std::shared_ptr<EmployeeInfo> root) : root(root) {}
 
-template <class ItemType>
-BinaryNodeTree<ItemType>::BinaryNodeTree(const ItemType &rootItem, const std::shared_ptr<BinaryNodeTree<ItemType>> leftPtr, const std::shared_ptr<BinaryNodeTree<ItemType>> rightPtr) : rootPtr(std::make_shared<BinaryNode<ItemType>>(rootItem, leftPtr, rightPtr))
-{
-} // end constructor
+// helper functions
 
-template <class ItemType>
-BinaryNodeTree<ItemType>::~BinaryNodeTree()
-{
-    destroyTree(rootPtr);
-} // end destructor
-
-template <class ItemType>
-auto BinaryNodeTree<ItemType>::balancedAdd(std::shared_ptr<BinaryNode<ItemType>> subTreePtr, std::shared_ptr<BinaryNode<ItemType>> newNodePtr)
-{
-    if (subTreePtr == nullptr)
-    {
-        return newNodePtr;
+void BinaryNodeTree::insertHelper(std::shared_ptr<EmployeeInfo> node, std::shared_ptr<EmployeeInfo> newNode) {
+    if (node == nullptr) {
+        node = newNode;
     }
-    else
-    {
-        if (subTreePtr->getItem() > newNodePtr->getItem())
-        {
-            subTreePtr->setLeftChildPtr(balancedAdd(subTreePtr->getLeftChildPtr(), newNodePtr));
-        }
-        else
-        {
-            subTreePtr->setRightChildPtr(balancedAdd(subTreePtr->getRightChildPtr(), newNodePtr));
-        }
-        return subTreePtr;
+    else if (newNode->getId() < node->getId()) {
+        insertHelper(node->getLeft(), newNode);
+    }
+    else {
+        insertHelper(node->getRight(), newNode);
     }
 }
 
-template <class ItemType>
-auto BinaryNodeTree<ItemType>::moveValuesUpTree(std::shared_ptr<BinaryNode<ItemType>> subTreePtr)
-{
-    if (subTreePtr == nullptr)
-    {
-        return nullptr;
+bool BinaryNodeTree::removeHelper(std::shared_ptr<EmployeeInfo> node, int id) {
+    bool result{false};
+
+    if (node == nullptr) {
+        result = false;
     }
-    else
-    {
-        if (subTreePtr->getLeftChildPtr() != nullptr && subTreePtr->getLeftChildPtr()->getItem() > subTreePtr->getItem())
-        {
-            subTreePtr->setItem(subTreePtr->getLeftChildPtr()->getItem());
-            subTreePtr->setLeftChildPtr(moveValuesUpTree(subTreePtr->getLeftChildPtr()));
+    else if (id < node->getId()) {
+        removeHelper(node->getLeft(), id);
+    }
+    else if (id > node->getId()) {
+        removeHelper(node->getRight(), id);
+    }
+    else {
+        if (node->getLeft() == nullptr && node->getRight() == nullptr) {
+            node = nullptr;
         }
-        else if (subTreePtr->getRightChildPtr() != nullptr && subTreePtr->getRightChildPtr()->getItem() > subTreePtr->getItem())
-        {
-            subTreePtr->setItem(subTreePtr->getRightChildPtr()->getItem());
-            subTreePtr->setRightChildPtr(moveValuesUpTree(subTreePtr->getRightChildPtr()));
+        else if (node->getLeft() == nullptr) {
+            node = node->getRight();
         }
-        else
-        {
-            return subTreePtr;
+        else if (node->getRight() == nullptr) {
+            node = node->getLeft();
         }
-    }
-}
-
-// template <class ItemType>
-// void BinaryNodeTree<ItemType>::destroyTree(std::shared_ptr<BinaryNode<ItemType>> subTreePtr)
-// {
-//     if (subTreePtr != nullptr)
-//     {
-//         destroyTree(subTreePtr->getLeftChildPtr());
-//         destroyTree(subTreePtr->getRightChildPtr());
-//         subTreePtr->setLeftChildPtr(nullptr);
-//         subTreePtr->setRightChildPtr(nullptr);
-//     }
-// }
-
-template <class ItemType>
-bool BinaryNodeTree<ItemType>::add(const ItemType &newData)
-{
-    auto newNodePtr = std::make_shared<BinaryNode<ItemType>>(newData);
-    rootPtr = balancedAdd(rootPtr, newNodePtr);
-}
-
-template <class ItemType>
-bool BinaryNodeTree<ItemType>::remove(const ItemType &data)
-{
-    rootPtr = removeValue(rootPtr, data);
-}
-
-template <class ItemType>
-auto BinaryNodeTree<ItemType>::removeValue(std::shared_ptr<BinaryNode<ItemType>> subTreePtr, const ItemType &target, bool &success)
-{
-    if (subTreePtr == nullptr)
-    {
-        success = false;
-        return nullptr;
-    }
-    if (subTreePtr->getItem() == target)
-    {
-        subTreePtr = moveValuesUpTree(subTreePtr);
-        success = true;
-        return subTreePtr;
-    }
-    else
-    {
-        if (subTreePtr->getItem() > target)
-        {
-            subTreePtr->setLeftChildPtr(removeValue(subTreePtr->getLeftChildPtr(), target, success));
+        else {
+            std::shared_ptr<EmployeeInfo> temp = node->getLeft();
+            while (temp->getRight() != nullptr) {
+                temp = temp->getRight();
+            }
+            node->setId(temp->getId());
+            node->setName(temp->getName());
+            removeHelper(node->getLeft(), temp->getId());
         }
-        else
-        {
-            subTreePtr->setRightChildPtr(removeValue(subTreePtr->getRightChildPtr(), target, success));
-        }
+        result = true;
     }
-    return subTreePtr;
-}
 
-template <class ItemType>
-ItemType BinaryNodeTree<ItemType>::getEntry(const ItemType &anEntry) const
-{
-    return getEntryHelper(rootPtr, anEntry);
-}
-
-template <class ItemType>
-auto BinaryNodeTree<ItemType>::getEntryHelper(std::shared_ptr<BinaryNode<ItemType>> subTreePtr, const ItemType &target) const
-{
-    ItemType result;
-    if (subTreePtr == nullptr)
-    {
-        result = nullptr;
-    }
-    else if (subTreePtr->getItem() == target)
-    {
-        result = subTreePtr->getItem();
-    }
-    else if (subTreePtr->getItem() > target)
-    {
-        result = getEntryHelper(subTreePtr->getLeftChildPtr(), target);
-    }
-    else
-    {
-        result = getEntryHelper(subTreePtr->getRightChildPtr(), target);
-    }
     return result;
+}
+
+std::shared_ptr<EmployeeInfo> BinaryNodeTree::findHelper(std::shared_ptr<EmployeeInfo> node, int id) {
+    if (node == nullptr) {
+        return nullptr;
+    }
+    else if (id < node->getId()) {
+        return findHelper(node->getLeft(), id);
+    }
+    else if (id > node->getId()) {
+        return findHelper(node->getRight(), id);
+    }
+    else {
+        return node;
+    }
+}
+
+void BinaryNodeTree::print() {
+    printHelper(root);
+}
+
+void BinaryNodeTree::printHelper(std::shared_ptr<EmployeeInfo> node) {
+    while (node != nullptr) {
+        std::cout << node->getId() << " " << node->getName() << std::endl;
+        node = node->getRight();
+    }
+}
+
+void BinaryNodeTree::insert(std::string &name, int &id) {
+
+    std::shared_ptr<EmployeeInfo> newNode = std::make_shared<EmployeeInfo>(id, name);
+
+
+    insertHelper(root, newNode);
+}
+
+bool BinaryNodeTree::remove(int id) {
+
+    bool result = removeHelper(root, id);
+
+    return result;
+}
+
+std::shared_ptr<EmployeeInfo> BinaryNodeTree::find(int id) {
+    return findHelper(root, id);
 }
