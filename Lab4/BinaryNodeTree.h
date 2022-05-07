@@ -21,7 +21,7 @@ private:
     std::shared_ptr<EmployeeInfo> findHelper(std::shared_ptr<EmployeeInfo> node, int id);
 
     // helper function to print the tree
-    void printHelper(std::shared_ptr<EmployeeInfo> node);
+    void printHelper(const std::string &prefix, const std::shared_ptr<EmployeeInfo> node, bool isLeft);
 
 public:
     // constructor
@@ -33,7 +33,7 @@ public:
     ~BinaryNodeTree() {}
 
     // methods to insert a new EmployeeInfo into the tree
-    void insert(std::string &name, int &id);
+    void insert(const std::string &name, const int &id);
 
     // methods to remove an EmployeeInfo from the tree
     bool remove(int id);

@@ -12,19 +12,24 @@ void BinaryNodeTree::insertHelper(std::shared_ptr<EmployeeInfo> node, std::share
     if (node == nullptr) {
         root = newNode;
     }
-    // if node is not nullptr place newnode in the correct place
+    // if node is not nullptr
     else if (newNode->getId() < node->getId()) {
+        // if node's left is nullptr place newnode
         if (node->getLeft() == nullptr) {
             node->setLeft(newNode);
         }
+        // if node's left is not nullptr recurse left
         else {
             insertHelper(node->getLeft(), newNode);
         }
     }
+    // if node is not nullptr & newnode's id is greater than node's id
     else {
+        // if node's right is nullptr place newnode
         if (node->getRight() == nullptr) {
             node->setRight(newNode);
         }
+        // if node's right is not nullptr recurse right
         else {
             insertHelper(node->getRight(), newNode);
         }
@@ -84,17 +89,27 @@ std::shared_ptr<EmployeeInfo> BinaryNodeTree::findHelper(std::shared_ptr<Employe
 }
 
 void BinaryNodeTree::print() {
-    printHelper(root);
+    printHelper("", root, false);
 }
 
-void BinaryNodeTree::printHelper(std::shared_ptr<EmployeeInfo> node) {
-    while (node != nullptr) {
-        std::cout << node->getId() << " " << node->getName() << std::endl;
-        node = node->getRight();
+void BinaryNodeTree::printHelper(const std::string &prefix, const std::shared_ptr<EmployeeInfo> node, bool isLeft) {
+    // printing binary node tree
+    if( node != nullptr )
+    {
+        std::cout << prefix;
+
+        std::cout << (isLeft ? "|--" : "[__" );
+
+        // print the value of the node with ID and name
+        std::cout << node->getId() << " - " << node->getName() << std::endl;
+
+        // enter the next tree level - left and right branch
+        printHelper( prefix + (isLeft ? "|   " : "    "), node->getLeft(), true);
+        printHelper( prefix + (isLeft ? "|   " : "    "), node->getRight(), false);
     }
 }
 
-void BinaryNodeTree::insert(std::string &name, int &id) {
+void BinaryNodeTree::insert(const std::string &name, const int &id) {
 
     std::shared_ptr<EmployeeInfo> newNode = std::make_shared<EmployeeInfo>(id, name);
 
