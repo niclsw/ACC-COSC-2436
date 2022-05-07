@@ -8,14 +8,26 @@ BinaryNodeTree::BinaryNodeTree(std::shared_ptr<EmployeeInfo> root) : root(root) 
 // helper functions
 
 void BinaryNodeTree::insertHelper(std::shared_ptr<EmployeeInfo> node, std::shared_ptr<EmployeeInfo> newNode) {
+    // if node is nullptr place newnode 
     if (node == nullptr) {
-        node = newNode;
+        root = newNode;
     }
+    // if node is not nullptr place newnode in the correct place
     else if (newNode->getId() < node->getId()) {
-        insertHelper(node->getLeft(), newNode);
+        if (node->getLeft() == nullptr) {
+            node->setLeft(newNode);
+        }
+        else {
+            insertHelper(node->getLeft(), newNode);
+        }
     }
     else {
-        insertHelper(node->getRight(), newNode);
+        if (node->getRight() == nullptr) {
+            node->setRight(newNode);
+        }
+        else {
+            insertHelper(node->getRight(), newNode);
+        }
     }
 }
 
