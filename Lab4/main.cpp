@@ -25,7 +25,6 @@ int main() {
     
 
     // while loop to keep the program running
-    // **** GETING WEIRD INFINITE LOOP ERRORS ****
     do {
         // Print tree
         std::cout << "\nTHE TREE: " << std::endl;
@@ -33,9 +32,8 @@ int main() {
 
         // print the menu
         std::cout << "\n1. Insert" << std::endl;
-        std::cout << "2. Remove" << std::endl;
-        std::cout << "3. Find" << std::endl;
-        std::cout << "4. Exit" << std::endl;
+        std::cout << "2. Find" << std::endl;
+        std::cout << "3. Exit" << std::endl;
 
         // get the user's choice
         std::cout << "Enter your choice: ";
@@ -66,16 +64,6 @@ int main() {
                 std::cout << "Enter the id: ";
                 std::cin >> id;
 
-                tree.remove(id);
-
-                break;
-            }
-            case '3': {
-                int id{0};
-                
-                std::cout << "Enter the id: ";
-                std::cin >> id;
-
                 if (tree.find(id) != nullptr) {
                     std::cout << "Found: " << std::endl;
 
@@ -87,7 +75,7 @@ int main() {
 
                 break;
             }
-            case '4': {
+            case '3': {
                 std::cout << "Exiting..." << std::endl;
                 break;
             }
@@ -96,7 +84,7 @@ int main() {
                 break;
             }
         }
-    } while (choice != '4');
+    } while (choice != '3');
 
 
 

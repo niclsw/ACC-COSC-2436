@@ -5,8 +5,7 @@ BinaryNodeTree::BinaryNodeTree() : root(nullptr) {}
 
 BinaryNodeTree::BinaryNodeTree(std::shared_ptr<EmployeeInfo> root) : root(root) {}
 
-// helper functions
-
+// helper private functions
 void BinaryNodeTree::insertHelper(std::shared_ptr<EmployeeInfo> node, std::shared_ptr<EmployeeInfo> newNode) {
     // if node is nullptr place newnode 
     if (node == nullptr) {
@@ -36,44 +35,8 @@ void BinaryNodeTree::insertHelper(std::shared_ptr<EmployeeInfo> node, std::share
     }
 }
 
-bool BinaryNodeTree::removeHelper(std::shared_ptr<EmployeeInfo> node, int id) {
-    bool result{false};
-
-    if (node == nullptr) {
-        result = false;
-    }
-    else if (id < node->getId()) {
-        removeHelper(node->getLeft(), id);
-    }
-    else if (id > node->getId()) {
-        removeHelper(node->getRight(), id);
-    }
-    else {
-        if (node->getLeft() == nullptr && node->getRight() == nullptr) {
-            node = nullptr;
-        }
-        else if (node->getLeft() == nullptr) {
-            node = node->getRight();
-        }
-        else if (node->getRight() == nullptr) {
-            node = node->getLeft();
-        }
-        else {
-            std::shared_ptr<EmployeeInfo> temp = node->getLeft();
-            while (temp->getRight() != nullptr) {
-                temp = temp->getRight();
-            }
-            node->setId(temp->getId());
-            node->setName(temp->getName());
-            removeHelper(node->getLeft(), temp->getId());
-        }
-        result = true;
-    }
-
-    return result;
-}
-
-std::shared_ptr<EmployeeInfo> BinaryNodeTree::findHelper(std::shared_ptr<EmployeeInfo> node, int id) {
+std::shared_ptr<EmployeeInfo> BinaryNodeTree::findHelper(std::shared_ptr<EmployeeInfo> node, const int &id) {
+    // recursive implementation of find
     if (node == nullptr) {
         return nullptr;
     }
@@ -83,13 +46,8 @@ std::shared_ptr<EmployeeInfo> BinaryNodeTree::findHelper(std::shared_ptr<Employe
     else if (id > node->getId()) {
         return findHelper(node->getRight(), id);
     }
-    else {
-        return node;
-    }
-}
-
-void BinaryNodeTree::print() {
-    printHelper("", root, false);
+    
+    return (node->getId() == id) ? node : nullptr;
 }
 
 void BinaryNodeTree::printHelper(const std::string &prefix, const std::shared_ptr<EmployeeInfo> node, bool isLeft) {
@@ -98,32 +56,48 @@ void BinaryNodeTree::printHelper(const std::string &prefix, const std::shared_pt
     {
         std::cout << prefix;
 
-        std::cout << (isLeft ? "|--" : "[__" );
+        // set prefixes if node is left or right and check if node is root and assign special prefix if it is
+        // if isLeft prefix is "├--" and if not prefix is "|__"
+        std::cout << (getRoot()->getId() == node->getId() ? "RT-> " : (isLeft ? "|--" : "|__" ));
 
         // print the value of the node with ID and name
         std::cout << node->getId() << " - " << node->getName() << std::endl;
 
         // enter the next tree level - left and right branch
-        printHelper( prefix + (isLeft ? "|   " : "    "), node->getLeft(), true);
-        printHelper( prefix + (isLeft ? "|   " : "    "), node->getRight(), false);
+        // | is down
+        printHelper(prefix + (isLeft ? "|   " : "    "), node->getLeft(), true);
+        printHelper(prefix + (isLeft ? "|   " : "    "), node->getRight(), false);
     }
 }
 
+std::shared_ptr<EmployeeInfo> BinaryNodeTree::getRoot() const {
+    return root;
+}
+
+// public functions
+void BinaryNodeTree::print() {
+    // probably won't come accross this case but if root is not nullptr
+    if (root != nullptr) {
+        // send empty prefix string, root, and false to printHelper
+        printHelper("", root, false);
+    }
+    else {
+        std::cout << "Tree is empty" << std::endl;
+    }
+}
+
+
+
 void BinaryNodeTree::insert(const std::string &name, const int &id) {
 
+    // create new EmployeeInfo object
     std::shared_ptr<EmployeeInfo> newNode = std::make_shared<EmployeeInfo>(id, name);
 
-
+    // call insertHelper function to insert new EmployeeInfo object
     insertHelper(root, newNode);
 }
 
-bool BinaryNodeTree::remove(int id) {
-
-    bool result = removeHelper(root, id);
-
-    return result;
-}
-
-std::shared_ptr<EmployeeInfo> BinaryNodeTree::find(int id) {
+std::shared_ptr<EmployeeInfo> BinaryNodeTree::find(const int &id) {
+    // call findHelper function to find EmployeeInfo object target ID
     return findHelper(root, id);
 }
