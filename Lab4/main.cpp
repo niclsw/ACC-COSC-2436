@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////////////////////
+// Nicklaus Walker
+// Lab 3 - COSC-2436-003
+// This will ask the user for a file and load the values into a binary tree and
+// allow the user to view and add to the tree. Each action will automatically display
+// the tree.
+////////////////////////////////////////////////////////////////////////////////
+
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -22,10 +30,13 @@ int main() {
     readToTree(tree, file);
     std::cout << "File read to tree" << std::endl;
 
-    
-
     // while loop to keep the program running
     do {
+
+        // Clear input stream
+        std::cin.clear();
+        std::cin.ignore(100, '\n');
+
         // Print tree
         std::cout << "\nTHE TREE: " << std::endl;
         tree.print();
@@ -42,23 +53,28 @@ int main() {
         // switch statement to define the user's choice
         switch (choice) {
             case '1': {
-                std::string name{""}, id{""};
-
-                std::cout << "Enter the name: ";
-                std::cin >> name;
+                // Insert node
 
                 // Clear input stream
                 std::cin.clear();
                 std::cin.ignore(100, '\n');
 
+                std::string name{""}, id{""};
+
+                std::cout << "Enter the name: ";
+                std::getline(std::cin, name);
+
                 std::cout << "Enter the id: ";
                 std::cin >> id;
 
+                // send name and ID to tree
                 tree.insert(name, stoi(id));
 
                 break;
             }
             case '2': {
+                // Find ID
+
                 int id{0};
                 
                 std::cout << "Enter the id: ";
@@ -76,6 +92,8 @@ int main() {
                 break;
             }
             case '3': {
+                // Exit
+
                 std::cout << "Exiting..." << std::endl;
                 break;
             }
@@ -86,9 +104,7 @@ int main() {
         }
     } while (choice != '3');
 
-
-
-
+    // close file
     file.close();
     return 0;
 }

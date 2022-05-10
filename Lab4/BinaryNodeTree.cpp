@@ -57,7 +57,7 @@ void BinaryNodeTree::printHelper(const std::string &prefix, const std::shared_pt
         std::cout << prefix;
 
         // set prefixes if node is left or right and check if node is root and assign special prefix if it is
-        // if isLeft prefix is "├--" and if not prefix is "|__"
+        // if isLeft = true the prefix is "├--" and if not prefix is "|__"
         std::cout << (getRoot()->getId() == node->getId() ? "RT-> " : (isLeft ? "|--" : "|__" ));
 
         // print the value of the node with ID and name
