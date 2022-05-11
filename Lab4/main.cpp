@@ -28,7 +28,6 @@ int main() {
 
     // Read file to tree
     readToTree(tree, file);
-    std::cout << "File read to tree" << std::endl;
 
     // while loop to keep the program running
     do {
@@ -55,17 +54,17 @@ int main() {
             case '1': {
                 // Insert node
 
-                // Clear input stream
-                std::cin.clear();
-                std::cin.ignore(100, '\n');
-
                 std::string name{""}, id{""};
 
                 std::cout << "Enter the name: ";
                 std::getline(std::cin, name);
 
                 std::cout << "Enter the id: ";
-                std::cin >> id;
+                std::getline(std::cin, id);
+
+                // Clear input stream
+                std::cin.clear();
+                std::cin.ignore(100, '\n');
 
                 // send name and ID to tree
                 tree.insert(name, stoi(id));
@@ -81,12 +80,10 @@ int main() {
                 std::cin >> id;
 
                 if (tree.find(id) != nullptr) {
-                    std::cout << "Found: " << std::endl;
-
-                    std::cout << tree.find(id)->getId() << " " << tree.find(id)->getName() << std::endl;
+                    std::cout << "Found: " << tree.find(id)->getId() << " " << tree.find(id)->getName();
                 }
                 else {
-                    std::cout << "Not found" << std::endl;
+                    std::cout << "Could not find ID: " << id << std::endl;
                 }
 
                 break;
